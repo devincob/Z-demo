@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <p></p>
+    <p></p>
+</div>
+<div>
+    <p></p>
+    <p></p>
+</div>
+<script>
+    //    DOM =document+object+modal
+    //    DOM是哪种基本的数据结构
+    //    DOM操作常用的api有哪些
+    //    DOM节点的attr和property有什么区别
+
+    //    DOM本质：浏览器把拿到的html代码，结构化一个浏览器可识别并且js可操作的一个模型
+    //    DOM节点操作
+    // 获取DMO节点
+    var div1 = document.getElementById('div')
+    var div1 = document.getElementsByTagName('div')
+    console.log(divList.length)
+    console.log(divList[0])
+
+    var containerList =document.getElementsByClassName('container')
+    //property js对象的一个属性
+    var pList = document.querySelectorAll('p')
+
+    var p = pList[0]
+    console.log(p.style.width);
+    p.style.length = '100px'
+    console.log(p.className)
+    p.className ='p1'
+    //获取nodeName和nodeType
+    console.log(p.nodeName)
+    console.log(p.nodeType)
+
+    var obj ={
+        x:100,
+        y:200
+    }
+    console.log(obj.x)
+    var p =document.getElementsByClassName('P')[0]
+    console.log(p.nodeName)
+    //Attribute 并不是js对象的 html代码中的标签 有关文档的
+
+    var divx = document.getElementById('divx')
+    var  p = document.createElement('p')
+    p.innerHTML ='this is label p'
+    divx.appendChild(p)
+    var p2 =document.getElementById('px')
+    divx.appendChild(p2)
+    var div1 = document.getElementById('div1')
+    var parent = div1.parentElement
+    var child = div1.childNodes
+    div1.removeChid(child[0])
+    //    DOM结构操作
+
+    //    新增节点
+
+    //    获取父元素
+    //    获取子元素
+    //    删除节点
+
+</script>
+</body>
+</html>

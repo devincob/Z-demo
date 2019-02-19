@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div>
+    <div>
+        <p>1,JS中使用 typeof能得到的那些类型</p>
+        <p>2,何时使用===何时使用==</p>
+        <p>3,window.onload和DOMContentLoaded的区别是什么</p>
+    </div>
+    <div>
+        <p>4,用JS创建10个 a标签，点击的时候弹出来对应的序号</p>
+        <p>5,简述 如何实现一个模拟加载器 实现类似requirejs的基本功能</p>
+        <p>6,实现数组的随机排序</p>
+    </div>
+    <div>
+        <p>7,JS中有那些内置函数</p>
+        <p>8,JS变量按照存储方式区分为那些类型,并描述其特点</p>
+        <p>9,如何理解JSON</p>
+    </div>
+    <div>
+        <p>1,如何准确判断一个变量是数组类型</p>
+        <p>2,写一个原型链继承的例子</p>
+        <p>3,描述new 一个对象的过程</p>
+        <p>4,zepto或者其他框架 源码中如何 使用原型链</p>
+    </div>
+</div>
+<body>
+<script>
+    window.onload=function() {
+        for (var i = 0; i < 10; i++) {
+            (function (i) {
+                var a = document.createElement('a');
+                a.innerHTML = i + '<br>';
+                document.body.appendChild(a);
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();  //取消默认事件，指a标签
+                    alert(i);
+                });
+
+            })(i);
+
+        }
+    }
+</script>
+</body>
+</html>

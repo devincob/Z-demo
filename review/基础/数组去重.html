@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //数组去重
+    Array.prototype.unique = function () {
+        var array = []
+        var obj = {}
+        for (var i = 0; i < this.length; i++) {
+            var v = this[i]
+            if (!obj[v]) {
+                array.push(this[i])
+                obj[v] = 1
+            }
+        }
+        return array
+    }
+    var arr = [1, 2, 3, 4, 3, 5, 1]
+    console.log(arr.unique())
+    //
+    function unique1(arr) {
+        if (!Array.isArray(arr)) {
+            console.log('类型错误!')
+            return
+        }
+        return Array.from(new Set(arr))
+    }
+
+    console.log(unique1(arr))
+//
+    function unique2(arr) {
+        if (!Array.isArray(arr)) {
+            console.log('type error!')
+            return
+        }
+        return [...new Set(arr)]
+    }
+    console.log(unique2(arr))
+</script>
+</body>
+</html>

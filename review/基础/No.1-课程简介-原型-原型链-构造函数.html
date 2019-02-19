@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型和原型链</title>
+</head>
+<body>
+<div id="demo"></div>
+<script type="application/javascript">
+// 1,如何准确判断一个变量是数组类型
+// 2,写一个原型链继承的例子
+ function Elem(id){
+     this.elem = document.getElementById(id)
+ }
+Elem.prototype.html =function(val){
+    var elem = this.elem
+    if (val){
+        elem.innerHTML =val
+        document.body.appendChild(elem)
+        return this
+    }else {
+        elem.innerHTML ='none'
+    }
+}
+Elem.prototype.on =function(type,fn){
+     var elem =this.elem
+    elem.addEventListener(type,fn)
+}
+ var div  =new Elem('demo')
+div.html('<div>newElement</div>').on('click', function(){
+    console.log(this)
+})
+// 3,描述new 一个对象的过程
+// 4,zepto或者其他框架 源码中如何 使用原型链
+// 一、构造函数
+// 大写字母开头的函数 基本就是构造函数
+function Fdd(name,age){
+    this.name = name
+    this.age = age
+    this.class = 'class-1'
+//    return this // 默认有这一行 即使不写这一行 默认也是返回这样
+}
+var f = new Fdd('zhangsan', 20)
+// var f1 =new Fdd('qsi', 21)
+console.log(f)
+// 二、构造函数-扩展
+var a = {} //其实是 var = new Object()的语法糖
+var b = [] //其实是 var = new Array()的语法糖
+function Foo(){} //其实是 var Fdd =new Object()
+
+// 用intanceof 判断 数组
+// 三、原型规则和实例
+// 5条原型规则
+// 原型规则是学习原型链的基础
+// 1,所有的引用类型 都具有对象特性即可以自由扩展属性 null除外
+// 2,所有的引用类型（数组,对象,函数）都具有一个__proto__（隐形类型）属性值是一个普通的对象
+// 3,所有的函数都有一个prototy属性,（显示类型）属性值也是一个普通对象
+// 4,所有的引用类型（数组,对象,函数）__proto__属性值指向它的构造函数的'prototype'属性值
+// 5,当试图得到一个对象的某个属性时,如果这个对象本身没有这个属性,那么会有去它的__proto__（即它的构造函数的prototype）中寻找
+
+var a = {}; a.name ='xiaoxiao'
+var b = []; b.class = 20
+function fn(){}
+fn.content = 200
+console.log(a.__proto__)
+console.log(b.__proto__)
+console.log(fn.__proto__)
+
+console.log(fn.prototype)
+console.log(a.__proto__ === Object.prototype)
+
+function Fnew(name){
+    this.name = name
+}
+Fnew.prototype.alertName = function(){
+    alert(this.name)
+}
+//创建实例
+var f = new Fnew('zhanghan')
+f.printName = function(){
+    console.log(this.name)
+}
+f.printName()//本身属性
+f.alertName() //通过隐形属性找到的属性 this永远指向的是对象本身
+f.toString()//构造函数中也不存在的属性 要去f.__proto__.__proto__
+// 四、原型链
+var item
+for (item in f){ //拿到f自身的属性
+ if(f.hasOwnProperty(item)){
+     console.log(item)
+ }
+}
+// 五、instanceof
+</script>
+</body>
+</html>

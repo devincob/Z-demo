@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="demo"></div>
+<script>
+    function Elem (id) {
+        this.elem = document.getElementById(id)
+    }
+    Elem.prototype.html= function(val){
+        var elem = this.elem
+        if(val) {
+            elem.innerHTML = val
+            console.log(val)
+            return this
+        }else {
+            console.log(elem.innerHTML)
+        }
+    }
+    Elem.prototype.on = function (type, fn){
+        var elem = this.elem
+        elem.addEventListener(type, fn)
+        return this
+    }
+    let div = new Elem('demo')
+    div.html('<P>new element</P>').on('click', function(){
+        alert('already click this')
+        div.html('<h3>add new h3</h3>')
+    })
+</script>
+</body>
+</html>

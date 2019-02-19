@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量计算</title>
+</head>
+<body>
+
+<div>
+    Name: <span id="jname"></span><br />
+    Age: <span id="jage"></span><br />
+    Address: <span id="jstreet"></span><br />
+    Phone: <span id="jphone"></span><br />
+</div>
+<script>
+// 类型转化的时机
+// 1,字符串拼接
+var a =100 + 100 //200
+var b =100 + '100'//100100
+
+// 2,==运算符
+console.log(100 == '100') // true
+console.log(0 == '')// true
+console.log(null == undefined)// true
+
+// 3,if 强制类型转换
+var a = true
+if (a){}
+var b =100
+if(b){}
+var c = ''
+if(c){}
+
+// 4,逻辑运算符
+console.log(10&&0) //0
+console.log(''||'abc')//abc
+console.log(!window.abc)//true
+//判断一个变量会被当做 true 还是false
+var a3 =100
+var b3 = ''
+console.log(!!a3)
+console.log(!!b3)
+
+var obj ={
+    a : null
+}
+if(obj.a == null){
+    // 这里相当于obj.a === null || obj.a === undefined 的简写形式 JQ源码推荐写法
+}
+//Js不考虑 浏览器环境 运行环境 单纯作为语言内置的一些函数
+//     Object
+//     Array
+//     Boolean
+//     Number
+//     String
+//     Function
+//     Date
+//     RegExp
+//     Error
+// 如何理解JSON
+// JSON,是一种数据格式
+// JSON,是对象内置在js中的对象
+// JSON有两个API
+var objToString ={a:100, b:'20'}
+var objToStringChange = JSON.stringify(objToString)//对象变成字符串
+console.log(objToStringChange)
+var stringToObj = '{"a":"100", "b":"20"}'
+var stringToObjChange = JSON.parse(stringToObj)// 字符串编程对象
+console.log(stringToObjChange)
+
+var JSONObject= {
+    "name":"Bill Gates",
+    "street":"Fifth Avenue New York 666",
+    "age":56,
+    "phone":"555 1234567"};
+document.getElementById("jname").innerHTML=JSONObject.name
+document.getElementById("jage").innerHTML=JSONObject.age
+document.getElementById("jstreet").innerHTML=JSONObject.street
+document.getElementById("jphone").innerHTML=JSONObject.phone
+</script>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>vue $set</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.js"></script>
+</head>
+<body>
+<div id="app">
+  <div style=" width: 0;
+      height: 0;
+      border-width: 50px;
+      border-style: solid;
+      border-color: #f00 transparent transparent;
+      border-radius: 50px;"></div>
+  <ul>
+    <li>{{obj.name}}</li>
+    <li>{{obj.age}}</li>
+    <li>{{obj.sex}}</li>
+    <li>{{obj.info.content}}</li>
+    </li>
+  </ul>
+  <blog-post>
+    <h1 slot="header">
+    about me
+  </h1>
+    <p>Here's some page content, which will be included in vm.$slots.default, because it's not inside a named slot.</p>
+    <p slot="footer">
+    copyright 2018 evan you
+  </p>
+  </blog-post>
+  <anchored-heading :level="3">Hello world!</anchored-heading>
+  <button @click="showSex">显示性别</button>
+  <div>
+    <button @click='decrement'>-</button>
+    {{count}}
+    <button @click='increment'>+</button>
+  </div>
+</div>
+
+<script>
+  const store = new Vuex.Store({
+    state: {
+      count: 0
+    },
+    mutations: {
+      increment (state) {
+        state.count++
+      },
+      decrement:state=>state.count--
+    }
+  })
+  // store.state('increment')
+  Vue.component('blog-post',{
+    render (createElement) {
+      let header = this.$slots.header
+      let body = this.$slots.default
+      let footer = this.$slots.footer
+      return createElement('div', [
+        createElement('header',header),
+        createElement('main',body),
+        createElement('footer',footer),
+      ])
+    }
+  })
+  Vue.component('anchored-heading', {
+    render(createElement){
+      return createElement(
+        'h'+this.level,
+        this.$slots.default
+      )
+    },
+    props:{
+      level:{
+        type:Number,
+        required:true
+      }
+    },
+  })
+  let vm = new Vue({
+    el:'#app',
+    store,
+    data() {
+      return {
+        input:'#hello',
+        level: 1,
+        obj:{
+          name: "SMlZ",
+          age: '3',
+          info: {
+            content: 'my name is smlz'
+          }
+        }
+      }
+    },
+    computed:{
+      compiledMarkdown: function () {
+        return marked(this.input, { sanitize: true })
+      },
+      count(){
+        return store.state.count
+      }
+    },
+    methods:{
+      showSex(){
+        Vue.set(this.obj,'sex', '女')//this.$set(this.obj,'sex', '女女');
+      },
+      increment(){
+        store.commit('increment')
+        console.log(store.state.count) // +
+      },
+      decrement(){
+        store.commit('decrement')
+        console.log(store.state.count) // -
+      },
+    },
+    mounted(){
+      store.commit('increment')
+      console.log(this.obj)
+      console.log(store.state.count) // -> 1
+      this.$set(this.obj.info,'content', 'who is my girlfriend?');
+    }
+  });
+</script>
+</body>
+</html>
