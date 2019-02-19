@@ -1,0 +1,30 @@
+#Authon: devincob
+
+import math
+def myf(x):
+    if not isinstance(x, (int, float)):
+        raise TypeError("bad operand type.")
+    if x >= 0:
+        return x
+    else:
+        return -x
+print( myf(-9) )
+
+def calc(*numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n*n
+    return sum
+print(calc(1, 2, 3))
+nums = [1, 2, 3, 4, 5]
+print(calc(*nums))
+
+def fact(n):
+    if n == 1:
+        return 1
+    return n * fact(n-1)
+print(fact(100))
+
+L = [1, 3, 5, 7, 9]
+r = []
+print(L[0:3])
