@@ -41,7 +41,7 @@
         frag.appendChild(frag);
     }
     listNode.appendChild(frag)
-    //事件节流
+    //事件节流 按键按下按的速度比较快 当它停的时候才开始事件
     var textarea =document.getElementsById('text')
     var timeoutId
     textarea.addEventListener('keyup',function(){

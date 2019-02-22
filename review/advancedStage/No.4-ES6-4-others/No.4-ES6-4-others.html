@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //块级
+    var i=100
+    i=200
+    let j=10
+    j=100
+    字符串拼接
+    let str='1111111111'
+    `${i}${str}`
+//    <!--解构-->
+/*    var obj ={
+        a:100,
+        b:200
+    }
+    var a= obj.a
+    var b = obj.b
+    var arr =['xxx','yyy','zzz']
+    var x=arr[0]*/
+    const obj = {
+        a:10,b:20,c:30
+    }
+    let {a,c}=obj
+    console.log(a, c);
+    const arr1 =['xxx','yyyy','zzzz']
+    let [x,y,z]=arr1
+    console.log(x, y, z);
+    for (var item in obj){
+        console.log(item)
+    }
+console.log(item);
+/*    for(let item in obj){
+        console.log(item);
+    }
+console.log(item);*/
+//函数默认参数
+function fn(a,b){
+    if (b===null){
+        b=0
+    }
+}
+function fn1(a,b=0){
+
+}
+
+//箭头函数
+function fnx() {
+    console.log('real',this)
+    var array = [1, 2, 3, 4]
+    array.map(function (item) {
+        console.log('普通js', this);
+        return item + 1
+    })
+    array.map(item => item + 1)
+    array.map((item, index) => {
+        console.log('es6', this);
+        return item + index
+    })
+}
+fnx.call({
+    a:100
+})
+</script>
+</body>
+</html>

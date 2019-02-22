@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*Es6模块化如何使用
+    class和普通构造函数有什么区别
+    promise的基本使用和标准
+    Es6的常用功能*/
+
+//  js构造函数
+/*    function MathHandle(x,y){
+        this.x=x
+        this.y=y
+    }
+    MathHandle.prototype.add=function(){
+        return this.x+this.y
+    }
+    var m=new MathHandle(1,2)
+    console.log(m.add());*/
+//    class基本语法
+    class MathHandle{
+        constructor(x,y){
+            this.x=x
+            this.y=y
+        }
+        add(){
+            return this.x+this.y
+        }
+    }
+    const m =new MathHandle(1, 2);
+    console.log(m, m.add())
+    console.log(typeof MathHandle)
+    console.log(MathHandle.prototype.constructor === MathHandle);
+    console.log(m.__proto__ === MathHandle.prototype);
+    //语法糖
+
+</script>
+
+</body>
+</html>
