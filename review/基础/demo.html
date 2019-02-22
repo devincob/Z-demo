@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="demo">demo</div>
+<script>
+    for(var i=0;i<10;i++){
+        (function(i){
+            var a = document.createElement('a')
+            a.innerHTML = i+'<br>'
+            document.body.appendChild(a)
+            a.addEventListener('click',function(){
+                alert(i)
+            })
+        })(i)
+    }
+    var xml = new XMLHttpRequest()
+    xml.onreadystatechange=function(){
+        if(xml.readyState===4){
+            if(xml.status===200){
+                alert(xml.responseText)
+            }
+        }
+    }
+    xml.open('GET','/API',true)
+    xml.send()
+
+    function Elem (id){
+        this.elem =document.getElementById(id)
+    }
+
+    Elem.prototype.html = function(val){
+        var elem = this.elem
+        elem.innerHTML =val
+        return this
+    }
+    Elem.prototype.on =function(type, fn){
+        var elem = this.elem
+        elem.addEventListener(type, fn)
+        return this
+    }
+    var elem =new Elem('demo')
+    elem.html('<p>new element</p>').on('click',function(){
+        alert(elem)
+    })
+</script>
+</body>
+</html>
