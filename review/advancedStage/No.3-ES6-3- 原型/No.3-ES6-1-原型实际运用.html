@@ -10,5 +10,31 @@
     //原型入户套体现他的扩展性
     //zepto Jquery如何运用原型
 </script>
+<p>jquery test 1</p>
+<p>jquery test 2</p>
+<p>jquery test 3</p>
+
+<div id="div1">
+    <p>jquery test in div</p>
+</div>
+<!--<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>-->
+<!--<script src="my-zepto.js"></script>-->
+<script src="my-jquery.js"></script>
+<!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>-->
+<script type="text/javascript">
+    var $p = $('p')
+    $p.css('font-size', '40px')
+    alert($p.html())
+
+    var $div1 = $('#div1')
+    $div1.css('color', 'blue')
+    alert($div1.html())
+</script>
+<script>
+    //为何把原型方法放在$.fn
+    $.fn.getNodeName=function(){
+        return this[0].nodeName
+    }
+</script>
 </body>
 </html>

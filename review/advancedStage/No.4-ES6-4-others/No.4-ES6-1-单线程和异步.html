@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+//    单线程-只有一个线程，同一时间只能做一件事
+//    原因->避免dom渲染冲突
+//    解决方案->异步
+/*//demo1
+console.log('start')
+var i,sum =0;
+    for (i=0; i<100000000; i++ ){
+        sum+=i
+    }
+console.log(sum)*/
+/*//demo2
+console.log(100);
+alert('hello');
+console.log(200);*/
+//demo3
+//    浏览器需要渲染dom
+//    js可以修改dom
+//    js执行的时候浏览器dom渲染会暂停
+//    两端js也不能同时执行（都修改dom 就冲突了）
+//    webworker支持多线程，但是不能访问dom
+//    解决方案->异步 先让其他代码运行 因为js是单线程的，一段时间只能做一件事
+//我们不能让这些定是等待的或者不定时等待的占用我们后面该做的事情，不能耗着
+console.log(100);
+setTimeout(()=>{
+    console.log(200);
+}, 1000)
+$.ajax({
+    url:'./data.json',
+    success:function (res) {
+        console.log(res)
+    }
+})
+console.log(300);
+console.log(400);
+</script>
+</body>
+</html>
