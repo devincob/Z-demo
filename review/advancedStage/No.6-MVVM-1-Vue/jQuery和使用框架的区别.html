@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery实现todo-list</title>
+</head>
+<body>
+
+<div id="app">
+    <div>
+        <input type="text" v-model="title">
+        <button @click="add">submit</button>
+    </div>
+    <ul>
+        <li v-for="(item,index) in list" :key="index">
+            {{item}}
+            {{list}}
+        </li>
+    </ul>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el:'app',
+        data:{
+            title:'',
+            list:[]
+        },
+        methods:{
+            add:function(){
+                this.list.push(this.title)
+                this.title =''
+            }
+        }
+    })
+</script>
+</body>
+</html>
