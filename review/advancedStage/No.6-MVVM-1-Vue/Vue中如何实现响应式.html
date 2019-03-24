@@ -2,13 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <name>name</name>
+    <script src="https://cdn.bootcss.com/vue/2.6.8/vue.min.js"></script>
 </head>
+
 <body>
+
+<div id="app">
+    <div>
+        <p>{{name}}</p>
+        <p>{{age}}</p>
+    </div>
+</div>
 <script>
-//理解Object.defineProperty
-//如何实现get和set的
-//将data的属性代理到vm上
+    //响应式：vue如何监听data的每一个属性的变化？
+    // 什么是响应式 ：
+    // 1,修改data属性之后，vue立刻监听到
+    // 2,data属性被代理到vm上
+
+    //理解Object.defineProperty
+    //如何实现get和set的
+    //将data的属性代理到vm上
+
+    var obj={}
+    var _name ='zhangsan'
+    Object.defineProperty(obj, 'name',{
+        get:function () {
+            return _name
+        },
+        set:function (newVal) {
+            _name =newVal
+        }
+    })
+</script>
+<script type="text/javascript">
+//    const vm = new Vue({
+//        el:'#app',
+//        data:{
+//            name:'zhangsan',
+//            age:20
+//        },
+//        methods:{
+//        }
+//    })
+</script>
+<script>
+    //模拟实现 vue的响应式
+    var vm={}
+    var data ={
+        age:60,
+        name:'12'
+    }
+    for(let key in data){
+        (function(key) {
+            Object.defineProperty(vm, key, {
+                get: function () {
+                    return data[key]
+                },
+                set: function (newVal) {
+                    data[key] = newVal
+                }
+            })
+        })(key)
+    }
+
+
 </script>
 </body>
+
 </html>

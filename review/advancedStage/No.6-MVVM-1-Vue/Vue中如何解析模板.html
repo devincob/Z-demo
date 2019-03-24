@@ -6,9 +6,52 @@
 </head>
 <body>
 <script>
-//模板字符串,有逻辑,嵌入js变量
-//模板必须为js代码(有逻辑 渲染html,嵌入js变量)
+//模板解析引擎：vue的模板如何被解析，指令如何处理
+
+//模板是什么？模板是字符串,有逻辑v-if，v-for,嵌入js变量
+//和html很像，但是有很大区别
+//模板是动态的,最终要转化成html来显示
+//模板必须要转化为js代码(有逻辑 渲染html,嵌入js变量)
+
+//为何要转化为js 因为只有js图灵完备语言，能逻辑处理,只有js才能动态渲染页面
+//因此模板最重要转换成一股js函数(render函数)
 //render函数是什么样子的
+//with函数的用法
+var obj ={
+    name:'12113',
+    age:12,
+    getAddress(){
+        alert('beijing')
+    }
+}
+function fn() {
+    with (obj) {
+        alert(name)
+        alert(age)
+        getAddress()
+    }
+}
+fn()
+//模板生成render函数
+    `
+<div id='app'>
+    <p>{{price}}</p>
+</div>
+`
+//转化成
+`
+with(this){
+    return _c(
+        'div',
+        {
+            attrs:{'id':'app'}
+        },
+        [
+            _c('p', [_v(_s(price))])
+        ]
+    )
+}
+`
 //render函数执行时返回vnode
 //updateCompent
 </script>
