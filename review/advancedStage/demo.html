@@ -1,32 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>css3 实现幻灯片效果</title>
+    <style type="text/css">
+        .divPic {
+            width: 600px;
+            height: 500px;
+            margin: 50px auto 0;
+            overflow: hidden;
+            box-shadow:  0 0 5px rgba(0,0,0,1);   /*CSS3 box-shadow属性,里面的值的设置s可以去网上查*/
+            background-size: cover;
+            background-position: center;
+            -webkit-animation-name: "loops"; /*检索或设置对象所应用的动画名称*/
+            -webkit-animation-duration: 10s; /*检索或设置对象动画的持续时间*/
+            -webkit-animation-iteration-count: infinite;  /*检索或设置对象动画的循环次数，此处的"infinite"为无限循环的意思*/
+        }
+
+        @-webkit-keyframes "loops" {  /*动画名称和上面设置的动画名称一样*/
+            /*下面是动画过程*/
+            0% {
+                background: url(https://article-fd.zol-img.com.cn/t_s640x2000/g2/M00/0B/0C/ChMlWlx_6WqIVZdgAAaC7pHL2G0AAIpDgH4w9cABoMG032.jpg) no-repeat;
+            }
+
+            50% {
+                background: url(https://article-fd.zol-img.com.cn/t_s640x2000/g2/M00/0A/00/ChMlWlx4qVaIdVRnAAFrEwM83CoAAIh9wNdmesAAWsr154.jpg) no-repeat;
+            }
+            100% {
+                background: url(https://2e.zol-img.com.cn/product/196_640x2000/186/ceZ7EuVicNEF2.jpg) no-repeat;
+            }
+        }
+    </style>
 </head>
 <body>
+<!--<div class="divPic"></div>-->
 <script>
     window.onload=function() {
-        // for (var i = 0; i < 10; i++) {
-        //
-        //     (function (i) {
-        //
-        //         var a = document.createElement('a');
-        //
-        //         a.innerHTML = i + '<br>';
-        //
-        //         document.body.appendChild(a);
-        //
-        //         a.addEventListener('click', function (e) {
-        //             e.preventDefault();  //取消默认事件，指a标签
-        //             alert(i);
-        //         });
-        //
-        //     })(i);
-        //
-        // }
-    }
 
+
+        console.log(document.compatMode)
+//    document对象有个属性compatMode,它有两个值：BackCompat对应quirks mode(怪异模式)，CSS1Compat对应strict mode（标准模式/严格模式）。
+        function fn(){
+            console.log('调用函数')
+        }
+        fn.call()
+        fn.apply()
+    }
 </script>
 </body>
 </html>

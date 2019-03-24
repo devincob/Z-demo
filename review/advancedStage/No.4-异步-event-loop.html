@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event-loop</title>
+</head>
+<body>
+<!--单线程：同一时间只能做一件事
+原因
+避免渲染Dom冲突
+解决方案 异步
+实现方式event-loop-->
+
+<!--事件轮循：js实现异步的具体解决方案
+同步代码，直接执行
+异步代码放在异步队列中
+等待同步函数执行完毕后，轮询执行异步列的函数-->
+
+<script>
+    /*setTimeout(function(){
+        console.log(100)
+    })
+    console.log(200)*/
+   /* setTimeout(function (){
+        console.log(1)
+    }, 1000)
+    setTimeout(function (){
+        console.log(2)
+    })
+    console.log(3)*/
+    $.ajax({
+        url:'xx',
+        success:function (res){
+            console.log('a')
+        }
+    })
+    setTimeout(function (){
+        console.log('b')
+    }, 1000)
+    setTimeout(function (){
+        console.log('c')
+    })
+    console.log('d')
+</script>
+</body>
+</html>

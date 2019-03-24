@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<script>
+    /*什么是单线程 和异步的关系
+    单线程：只有一个线程，只能做一件事,两段js不能同时执行
+    原因 能避免DOM渲染的冲突
+    单线程解决方案 -异步*/
+    // console.log('start')
+    // var i,sum=0
+    // for(i=0;i<100000000;i++){
+    //     sum+=1
+    // }
+    // console.log(sum);
+    // console.log(1);
+    // alert('hello');
+    // console.log(2);
+/*    const fn = () => (
+        new Promise((resolve, reject) => {
+        console.log(3);
+        let p = new Promise((resolve, reject) => {
+            console.log(7);
+            setTimeout(() => {
+                console.log(5);
+                resolve(6);
+            }, 0);
+            resolve(1);
+        });
+        resolve(2);
+        p.then(arg => { console.log(arg);});
+    }
+    ));
+    fn().then(arg => {
+        console.log(arg);
+    });
+    console.log(4);*/
+    // 3
+    // 7
+    // 4
+    // 1
+    // 2
+    // 5
+    // 浏览器需要渲染修改dom
+    // js可以修改dom
+    /*console.log(100);
+    $.ajax({
+        url:'xx',
+        success:function(res){
+            console.log(200, res)
+        }
+    }, 1000)
+    console.log(300);
+    console.log(400);*/
+
+    const p1 = new Promise((resolve, reject) => {
+        resolve('hello');
+    }).then(result => result).catch(e => e);
+
+    const p2 = new Promise((resolve, reject) => {
+        throw new Error('报错了');
+    }).then(result => result).catch(e => e);
+
+    Promise.all([p1, p2]).then(result => console.log(result)).catch(e => console.log(e));
+</script>
+</body>
+</html>
