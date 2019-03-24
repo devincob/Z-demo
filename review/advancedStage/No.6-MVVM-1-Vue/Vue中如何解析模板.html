@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.8/vue.min.js"></script>
 </head>
+
 <body>
+
+<div id="app">
+    <div>
+        <p>{{price}}</p>
+    </div>
+</div>
 <script>
 //模板解析引擎：vue的模板如何被解析，指令如何处理
 
@@ -17,7 +25,7 @@
 //因此模板最重要转换成一股js函数(render函数)
 //render函数是什么样子的
 //with函数的用法
-var obj ={
+/*var obj ={
     name:'12113',
     age:12,
     getAddress(){
@@ -31,27 +39,47 @@ function fn() {
         getAddress()
     }
 }
-fn()
+fn()*/
+</script>
+<script>
+
 //模板生成render函数
-    `
-<div id='app'>
-    <p>{{price}}</p>
-</div>
-`
+//    `
+//<div id='app'>
+//    <p>{{price}}</p>
+//</div>
+//`
 //转化成
-`
-with(this){
-    return _c(
+//`
+//with(this){
+//    return _c(
+//        'div',
+//        {
+//            attrs:{'id':'app'}
+//        },
+//        [
+//            _c('p', [_v(_s(price))])
+//        ]
+//    )
+//}
+//`
+var vm =new Vue({
+    el:'#app',
+    data:{
+        price:100
+    }
+})
+function render() {
+    return vm._c(
         'div',
         {
-            attrs:{'id':'app'}
+            attrs:{id:'app'}
         },
         [
-            _c('p', [_v(_s(price))])
+            vm._c('p', [vm._v(vm._s(vm.price))])
         ]
     )
 }
-`
 //render函数执行时返回vnode
 //updateCompent
 </script>
