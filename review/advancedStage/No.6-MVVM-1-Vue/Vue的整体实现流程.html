@@ -9,13 +9,22 @@
 //渲染：vue的模板如何被渲染成html，以及渲染过程
 
 //    第一步:解析模板成render函数
-//    1,with的用法，
-//    2,模板中所有信息都被render函数包含
-//    3,模板中用到的data中的属性，都变成了js变量
-//    4,模板中的v-model v-for，v-on都变成了js逻辑
-//    5,render()返回了vnode
+    //    1,with的用法，
+    //    2,模板中所有信息都被render函数包含
+    //    3,模板中用到的data中的属性，都变成了js变量
+    //    4,模板中的v-model v-for，v-on都变成了js逻辑
+    //    5,render()返回了vnode
+
 //    第二步:响应式开始监听
+    //    1,Object.defineProperty
+    //    2,将data的属性代理到vm上
+    //    3,实现get获取和set的设置
 //    第三步:首次渲染,显示页面,切绑定依赖
+    //    1,初次渲染,执行updateComponent,执行
+    //    2,执行render函数,会访问道vm.list和vm.title
+    //    3,就会被响应式中的get监听到
+    //    4,执行updateComponent，会走到vdom的patch方法
+    //    5,patch()将vnode渲染成DOM初次渲染完成
 //    第四步:data属性变化,出发rerender
 
 </script>
