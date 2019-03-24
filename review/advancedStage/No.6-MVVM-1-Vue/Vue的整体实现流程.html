@@ -6,13 +6,13 @@
 </head>
 <body>
 <script>
-//渲染：vue的模板如何被渲染成html，以及渲染过程
+//渲染：vue的模板如何被渲染成html,以及渲染过程
 
 //    第一步:解析模板成render函数
-    //    1,with的用法，
+    //    1,with的用法,
     //    2,模板中所有信息都被render函数包含
-    //    3,模板中用到的data中的属性，都变成了js变量
-    //    4,模板中的v-model v-for，v-on都变成了js逻辑
+    //    3,模板中用到的data中的属性,都变成了js变量
+    //    4,模板中的v-model v-for,v-on都变成了js逻辑
     //    5,render()返回了vnode
 
 //    第二步:响应式开始监听
@@ -23,10 +23,16 @@
     //    1,初次渲染,执行updateComponent,执行
     //    2,执行render函数,会访问道vm.list和vm.title
     //    3,就会被响应式中的get监听到
-    //    4,执行updateComponent，会走到vdom的patch方法
-    //    5,patch()将vnode渲染成DOM初次渲染完成
-//    第四步:data属性变化,出发rerender
 
+// (data中许多属性可能不被用到,可能被用到,被用到的才会走get,不被用到的不走get,未走get中的属性,set的时候 无需关心, 避免不必要的渲染）
+    //    4,执行updateComponent,会走到vdom的patch方法
+    //    5,patch()将vnode渲染成DOM初次渲染完成
+
+//    第四步:data属性变化,出发rerender
+    //    1,修改属性,被响应式的set监听到
+    //    2,set中执行updateComponent
+    //    3,set中执行updateComponent会重新执行,
+    //    4,生成的vnode和prevVnode,通过patch进行对比，渲染到html中
 </script>
 </body>
 </html>
