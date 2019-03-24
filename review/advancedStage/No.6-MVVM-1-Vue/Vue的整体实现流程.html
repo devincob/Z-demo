@@ -6,12 +6,18 @@
 </head>
 <body>
 <script>
-    //渲染：vue的模板如何被渲染成html，以及渲染过程
+//渲染：vue的模板如何被渲染成html，以及渲染过程
 
-    //    第一步:解析模板成render函数
+//    第一步:解析模板成render函数
+//    1,with的用法，
+//    2,模板中所有信息都被render函数包含
+//    3,模板中用到的data中的属性，都变成了js变量
+//    4,模板中的v-model v-for，v-on都变成了js逻辑
+//    5,render()返回了vnode
 //    第二步:响应式开始监听
 //    第三步:首次渲染,显示页面,切绑定依赖
 //    第四步:data属性变化,出发rerender
+
 </script>
 </body>
 </html>
