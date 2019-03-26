@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script src="./vue-2.5.13.js"></script>
+    <script src="vue-2.5.13.js"></script>
+    <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
     <div id="app">
+        <p>{{name}}</p>
+        <p>{{age}}</p>
         <p>{{price}}</p>
     </div>
 
-    <script>
+    <script type="text/javascript">
         var vm = new Vue({
             el: '#app',
             data: {
+                name: 'zhangsan', // vm.name
+                age: 20,  // vm.age
                 price: 100
             }
         })
@@ -44,7 +49,7 @@
                 ]
             )
         }
-
     </script>
 </body>
 </html>
+

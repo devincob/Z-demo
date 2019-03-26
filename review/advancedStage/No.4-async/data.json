@@ -1,4 +1,6 @@
 {
+  "a": 100,
+  "b": 200,
   "name": "dataName",
   "compilerOptions": {
     "module": "commonjs",
