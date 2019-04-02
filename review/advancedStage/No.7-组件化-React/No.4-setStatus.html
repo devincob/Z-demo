@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setStatus</title>
+    <style>
+        div {
+            font-family: '楷体';
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h3>说一下 React setState 的过程</h3>
+    <div><h4> setState 的异步</h4>
+        <ol>
+            <li> 可能会一次执行多次 setState</li>
+            <li> 你无法规定、限制用户如何使用 setState</li>
+            <li> 没必要每次 setState 都重新渲染，考虑性能</li>
+            <li> 即便是每次重新渲染，用户也看不到中间的效果</li>
+            <li> 只看到最后的结果即可</li>
+        </ol>
+    </div>
+    <div><h4> vue 修改属性也是异步</h4>
+        <ol>
+            <li> 效果、原因和 setState 一样</li>
+            <li> 对比记忆，印象深刻</li>
+            <li> 权当复习一下 vue 的渲染流程</li>
+        </ol>
+    </div>
+    <div><h4> setState 的过程</h4>
+        <ol>
+            <li> 每个组件实例，都有 renderComponent 方法
+            </li>
+            <li> 执行 renderComponent 会重新执行实例的 render
+            </li>
+            <li> render 函数返回 newVnode ，然后拿到 preVnode
+            </li>
+            <li> 执行 patch(preVnode, newVnode)
+            </li>
+        </ol>
+    </div>
+    <div><h4>question</h4>
+        <ol>
+            <li> setState 的异步：效果、原因</li>
+            <li> vue 修改属性也是异步：效果、原因</li>
+            <li> setState 的过程：最终走到 patch(preVnode, newVnode)</li>
+        </ol>
+    </div>
+</div>
+
+</body>
+</html>
