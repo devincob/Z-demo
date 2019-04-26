@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-python 中加入这句话 能识别中文 python3 默认如此
 
-print("hello world")
+# print("hello world")
 
 gf_name_of_alex ="xiawa"
 # print(msg, "111111")
 name = input("name:")
 age = int(input("age:")) #interger
-print(type(age), type(str(age)))
+# print(type(age), type(str(age)))
 job = input("job:")
 salary = input("salary:")
 # f浮点 d 数字 s string

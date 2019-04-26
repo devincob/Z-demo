@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    // forEach(),map(),filter(),reduce(),find()区别 -- 这几种都是数组的遍历方法方法 // 支持：除去(ie678)
+    // forEach()
+
+    // forEach只是简单的将数组遍历,类似于军人接受检阅,但是检阅结束并不会返回任何东西,也不会改变原数组,forEach的返回永远是undefind
+    // 遍历数组全部元素，利用回调函数对数组进行操作，自动遍历数组.length次数，且无法break中途跳出循环
+
+    // 因此不可控不支持return操作输出，return只用于控制循环是否跳出当前循环
+
+    // 因此难操作成新数组，新值，故不作多分析
+    let total = null
+    let arr = [1,2,3]
+    let newArr = []
+    let result = arr.forEach(a => {
+        total += a
+        if(a>0){
+            newArr.push(a)
+        }
+        // return total
+    })
+    console.log(result) //undefind
+    console.log(total) //6
+    console.log(arr) //[1,2,3]
+    console.log(newArr) //[1,2,3]
+    // forEach与for…in在数组的处理方式上是一致的,
+    // 区别在于for…in可以遍历对象上的所有可枚举属性,forEach只是数组上的一个函数
+
+    var arr2 = [1,2,3,4,5,] ;
+    arr2.forEach(function(item,index) {
+        console.log(item);
+    })
+    // map()
+
+    // map可以比喻成去超市买东西,你拿了一个物品清单,然后服务员帮你拿好东西,返回给你一个物品的新数组,但是对清单原数组不发生改变
+
+    let goodsList = ['apple','pear','orange']
+    let goods = goodsList.map(good => {
+        // return superMarket.getGoods(good)
+        return good === 'pear'
+    })
+    console.log(goodsList) //['apple','pear','orange']
+    console.log(goods) //三个物品对象
+    // reduce()
+
+    // reduce主要是为了对所有数组进行累加,最后返回一个值,不改变原数组,类似让男生把排队把把身高加起来
+
+    // let totalHight = boys.reduce((counetedHight/*当前的高度总和*/,boy/*数组当前遍历到的元素*/)=> {
+    //     return countedHigh + boy.hight
+    // })
+    // filter()
+
+// filter()就是让男生排队身高高于180的就归入到新数组中,最后返回一个里面装着所有180+的男生的数组,不改变原数组
+
+    // let highBoys = boys.filter((boy/数组当前遍历到的元素/) => {
+    //     return boy.highy >= 180
+    // }
+    // console.log(highBoys) // [boy,boy,....]
+    //
+    // find()
+
+    // find()函数就是你去找人想找一个180的男生帮你去搬砖,只要找到第一个就停止遍历,
+    // 因为只要找一个,为了减少无用的操作,虽然其他方法也能实现同样的要过,但是最好用find()
+
+    // let highBoy = boys.filter((boy/数组当前遍历到的元素/)=> {
+    //     return boy.highy >= 180
+    // }
+    // console.log(highBoy) // boy
+
+    // 数组以上的方法都不会该改变原数组,但是都不兼容ie的低版本,所以如果有兼容需求就避免使用,或者用babal-polyfill编译成替代写法
+</script>
+
+</body>
+</html>
