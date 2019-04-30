@@ -7,11 +7,71 @@
 <body>
 
 <script>
+    let xx = calc(1,2,3)
+    console.log(xx)
+
+    function calc(){
+        let result = 0;
+        for(let index in arguments) {
+            result += arguments[index]*arguments[index];
+        }
+        return result||'请传入参数';
+    }
+    let y = calx('city', 'Beijing', 'job', 'Engineer')
+    function calx(){
+      let result = ''
+      for (let n in arguments){
+          result = result + arguments[n]+'-'
+      }
+      return result||'请传入参数';
+    }
+    console.log(y,'devin')
+
+    function defult (L=[]){
+        L.push('END')
+        return L
+    }
+    console.log(defult())
+    console.log(defult())
+    console.log(defult())
+    function power(x, n) {
+        let s = 1
+        while (n > 0) {
+            n = n - 1
+            s = s * x
+        }
+        return s
+    }
+
+    let three = power(2, 2)
+    console.log('平方', three)
+    function cubers(x, n=3) {
+        let s = 1
+        while (n > 0) {
+            n = n - 1
+            s = s * x
+        }
+        return s
+    }
+    let  cuber = cubers(5)
+    let  cuber2 = cubers(3)
+    console.log('立方', cuber)
+    console.log('立方', cuber2)
 
 
+    function student(name,gender,age=15,city='shanghai'){
+        console.log(name)
+        console.log(gender)
+        console.log(age)
+        console.log(city)
+    }
+    // def enroll(name, gender, age=6, city='Beijing'):
+    student('Tom','male',12,'beijing')
+    student('Lisa','female')
+    student('Bob','male')
+    student('Devin','male')
     // forEach(),map(),filter(),reduce(),find()区别 -- 这几种都是数组的遍历方法方法 // 支持：除去(ie678)
     // forEach()
-
     // forEach只是简单的将数组遍历,类似于军人接受检阅,但是检阅结束并不会返回任何东西,也不会改变原数组,forEach的返回永远是undefind
     // 遍历数组全部元素，利用回调函数对数组进行操作，自动遍历数组.length次数，且无法break中途跳出循环
 
