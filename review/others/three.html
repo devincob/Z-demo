@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <script>
+       /* ES6你用过哪些特性
+        箭头函数
+        类以及到处继承
+        字符串模板
+        Promise
+        定义变量 let,const
+        async/await*/
+        // 解构赋值，默认参数
+        // Object.assign() //方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
+        // Array.includes()//方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false。
+    </script>
+</div>
+<div>
+    <script>
+        // async和await用途
+        // 让promise的异步变成同步运行成为可能，await可以等到promise执行完毕
+        // 箭头的函数中的this指向谁？
+
+        // 箭头函数没有自己的this指针
+        // 箭头函数的 this, 总是指向定义时所在的对象, 而不是运行时所在的对象
+        //  总是指向定义时所在的对象
+/*        var i
+        for (i = 0; i < 10; i++) {
+            setTimeout((
+                function (i) {
+                    return function () {
+                        console.log(i)
+                    }
+                }
+            )(i), 1000)
+        }*/
+        function Parent(){
+            this.a = 1;
+            this.b = [1,2,this.a];
+            this.c = {demo:5};
+            this.show = function(){
+                console.log(this.a + '' + this.c.demo + ':' + this.b)
+            }
+        }
+
+        function Child(){
+            this.a  = 2;
+            // this.change = function(){
+            //     this.b.push(this.a);
+            //     this.a = this.b.length;
+            //     this.c.demo = this.a++;
+            // }
+
+        }
+
+        Child.prototype = new Parent();
+        var parent = new Parent();
+        var child1 = new Child();
+        var child2 = new Child();
+
+        console.log(child1.a)
+        console.log(child2.a)
+        // child1.a = 11;
+        // child2.a = 12;
+    </script>
+</div>
+<div>
+    <script>
+        // webpack是一个资源处理工具，她的出现节省了，我们的人力和时间，对资源惊醒打包捷星，区分开发模式
+    // 常见的优化手段
+    //     分离第三方库，引入dll，引入多进程编译，比如happypack 提取公共的依赖模块，比如commonChunkPlugin
+    //     资源混淆和压缩 比如uglifyJS
+    //     分离样式这些减小bundle chunk的大小
+    //     输入一个URL到页面渲染的大体过程
+    //     大体过程
+    //     1,IP->DNS(浏览器=>系统缓存=>DNS服务器)->域名解析完成
+    //     2,TCP协议走完->HTTP(S) 协议->缓存->(分析请求头)->回馈报文
+    //     3,请求文档下来->DOM->CSSDOM->静态资源下载->render绘制文档->js解析
+    //     4用户看到页面
+    //
+    //     vue的组件的通讯手段有哪些
+    //     父->子:props
+    //     父->子 函数+ emit
+    //     兄弟：event bus | vuex
+    //
+    //     怎么理解vuex
+    //     vuex是一个状态管理容器
+    //     数据流向是单向数据流
+    //     且数据并不具有持久化的特性
+    //     里面的数据和方法理解成vue的一些特性
+        let string = ' 23242 1 '
+        let xx = /(^\s*)|(\s*$)/
+        string = string.replace(xx,'')
+            console.log(string, string.length)
+        String.prototype.trim = function () {
+            return this.replace(/(^\s*)|(\s*$)/g, '')
+        }
+    </script>
+
+</div>
+</body>
+</html>

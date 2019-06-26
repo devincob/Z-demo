@@ -3,28 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .fl{
+            float: left;
+        }
+        .aside{
+            border: 1px dotted deeppink;
+            width: 98px;
+            height: 118px;
+            padding-left: 10px;
+            line-height: 120px;
+            /*background-color: yellowgreen;*/
+        }
+        .content{
+            height: 120px;
+            width: 180px;
+            /*background-color: greenyellow;*/
+        }
+        .content_item{
+            border: 1px dotted deeppink;
+            padding-left: 10px;
+            line-height: 40px;
+            height: 38px;
+        }
+    </style>
 </head>
 <div>
+    <h4 style="margin-bottom: 20px;font-size: 18px;">js 复习内容</h4>
     <div>
-        <p>1,JS中使用 typeof能得到的那些类型</p>
-        <p>2,何时使用===何时使用==</p>
-        <p>3,window.onload和DOMContentLoaded的区别是什么</p>
+        <div>
+            <div class="aside fl">基础知识</div>
+            <div class="content fl">
+                <div class="content_item">原型 原型链</div>
+                <div class="content_item">作用域 闭包</div>
+                <div class="content_item">异步 单线程</div>
+            </div>
+        </div>
+        <div>
+            <div class="aside fl">js Api</div>
+            <div class="content fl">
+                <div class="content_item">Dom 操作</div>
+                <div class="content_item">ajax</div>
+                <div class="content_item">事件绑定</div>
+            </div>
+        </div>
+        <div>
+            <div class="aside fl">开发环境</div>
+            <div class="content fl">
+                <div class="content_item">版本管理</div>
+                <div class="content_item">模块化</div>
+                <div class="content_item">打包工具</div>
+            </div>
+        </div>
+        <div>
+            <div class="aside fl">运行环境</div>
+            <div class="content fl">
+                <div class="content_item">原型 原型链</div>
+                <div class="content_item">作用域 闭包</div>
+                <div class="content_item">异步 单线程</div>
+            </div>
+        </div>
+    </div>
+    <li style="clear: both">
+        <h4>1,JS中使用 typeof能得到的那些类型</h4>
+        <ol>
+            <li>考察js变量类型</li>
+            <script>
+                console.log('undefined', typeof undefined)
+                console.log('string', typeof '1231')
+                console.log('number', typeof 123)
+                console.log('布尔', typeof true)
+                console.log('object',typeof {})
+                console.log('Array', typeof [])
+                console.log('null', typeof  null)
+                console.log('function', typeof function(){})
+            </script>
+            <li>typeof 只能查看值类型不能看到引用类型但是 可以看到函数 因为函数定位很高</li>
+            <li>除了object 和 Array,null外的string number undefined  布尔值
+                <ol>
+                    <li>typeof undefined //undefined</li>
+                    <li>typeof string //string </li>
+                    <li>typeof number //number </li>
+                    <li>typeof boolean //boolean </li>
+                    <li>typeof function //function</li>
+                    <li>typeof object //object </li>
+                    <li>typeof Array //object</li>
+                    <li>typeof null //object</li>
+                </ol>
+            </li>
+            <li>扩展：对象数组和函数  引用类型(为了让内存功能共用空间)</li>
+        </ol>
+
+        <h4>2,何时使用===何时使用==</h4>
+        <ol>
+            <li>参考jq源码 obj.a ==null 或者 obj.undefined ==undefined的时候 用'=='其余用'==='</li>
+           <li> 用 '=='时：看对象的属性是否存在---函数中参数是否存的时候 </li>
+
+        </ol>
+        <div>强制类型转换</div>
+        <ol>
+            <li>字符串拼接会类型转换</li>
+            <li>'=='计算会类型转换</li>
+            <li>if语句会发生类型转换</li>
+            <li>if(0) NaN'' null undefined false 转化的是false</li>
+            <li>逻辑运算符会发生类型转换</li>
+        </ol>
+        <h4>3,window.onload和DOMContentLoaded的区别是什么</h4>
+        <div></div>
     </div>
     <div>
-        <p>4,用JS创建10个 a标签，点击的时候弹出来对应的序号</p>
-        <p>5,简述 如何实现一个模拟加载器 实现类似requirejs的基本功能</p>
-        <p>6,实现数组的随机排序</p>
+        <h4>4,用JS创建10个 a标签，点击的时候弹出来对应的序号</h4>
+        <div>作用域</div>
+        <h4>5,简述 如何实现一个模拟加载器 实现类似requirejs的基本功能</h4>
+        <div>js模块化</div>
+        <h4>6,实现数组的随机排序</h4>
+        <div>js的基础算法</div>
     </div>
     <div>
-        <p>7,JS中有那些内置函数</p>
-        <p>8,JS变量按照存储方式区分为那些类型,并描述其特点</p>
-        <p>9,如何理解JSON</p>
+        <h4>7,JS中有那些内置函数</h4>
+        <ol>
+            <li>Object function Object(){}</li>
+            <li>Array function Array(){}</li>
+            <li>Boolean</li>
+            <li>String</li>
+            <li>Number</li>
+            <li>Function function Function(){}</li>
+            <li>Date</li>
+            <li>RegExp</li>
+            <li>Error</li>
+            内置函数用什么作用
+            作为构造函数
+        </ol>
+        <h4>8,JS变量按照存储方式区分为那些类型,并描述其特点</h4>
+        <ol>
+            <li>值类型</li> 可以把数值分块存在内存中 特点：赋值后是一种拷贝
+            <li>引用类型</li>是数值公用一个内存块 节省内存空间 赋值后是变量指针的一个赋值
+        </ol>
+        <h4>9,如何理解JSON</h4>
+        <ol>
+            <li>json也是js内置的对象</li>
+            <li>有两个api：JSON.stringify({a:0, b:20})</li>
+            <li>JSON.parse('{'a':0, 'b':20}')</li>
+            <li>同时也是一种数据格式</li>
+        </ol>
     </div>
     <div>
-        <p>1,如何准确判断一个变量是数组类型</p>
-        <p>2,写一个原型链继承的例子</p>
-        <p>3,描述new 一个对象的过程</p>
-        <p>4,zepto或者其他框架 源码中如何 使用原型链</p>
+        <h4>1,如何准确判断一个变量是数组类型</h4>
+        <h4>2,写一个原型链继承的例子</h4>
+        <h4>3,描述new 一个对象的过程</h4>
+        <h4>4,zepto或者其他框架 源码中如何 使用原型链</h4>
     </div>
 </div>
 <body>

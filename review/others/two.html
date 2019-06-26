@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    块级元素如何水平垂直居中的方法
+
+</div>
+<div>
+important>行内样式>id>class>tag
+    标签语义化的理解
+    简而言之 就是不滥用标签
+    利于浏览器解析至引擎利于团队维护和协作
+</div>
+<div>
+    JS有哪几种数据类型，基本数据类型有哪些
+    string
+     number
+    boolean
+    null
+    object
+    undefined
+    symbol
+
+</div>
+<div>
+null和undefined的区别
+    if判断语句中都默认为false
+    大体两者都代表无 具体看差异
+    null转化为number是0
+    undefined是NaN
+    Null代表一同特殊的对象、
+    undefined代表调用一个值 该值没有赋值
+</div>
+<div>
+    dom/node节点获取
+    document.getElementByClassName
+    document.getElementByName
+    document.getElementByTagName
+    document.getElementById
+    querySelector
+
+    js中有一个函数，执行时对象查找时，永远不会查找原型，函数是
+    hasOwnProperty，更多的是区分自身的属性和原型链上的属性
+
+    给dom添加捕捉获取和冒泡的两种写法的事件点击，谁先执行
+
+    如果是事件监听的 通过 node.addEventListener('event',callback,bubble or capture)
+    谁先调用谁先执行
+    拿到节点的 优先获取，没有的才往上冒泡寻找
+
+</div>
+<div>
+    谈谈你对ajax的理解，以及用原生ja实现有那些要注意的点
+
+    ajax 是异步的JavaScript和xml，用来和服务端进行数据交互的
+
+
+    <script>
+        // let xhr = new XMLHttpRequest()// 声明对象
+        // xhr.onreadystatechange =function(){
+        //     if(xhr.readyState ===4){
+        //         if(xhr.status === OK){
+        //             console.log(xhr.responseText)
+        //         }else {
+        //             console.log(xhr.status)
+        //         }
+        //     }
+        // }
+        // xhr.open('get', 'xxx')
+        //
+        // xhr.setRequestHeader('Content-type', 'application/json')
+        // xhr.send(null)
+    </script>
+</div>
+<div>
+    <script>
+        // <!--去重复-->
+        let removeArr = [1,2,3,2,6,5,3,'a',3,'hello']
+        let x =  [...new Set(removeArr)]
+        console.log(x)
+        Array.prototype.extraChar = function(){
+            let cacheExtraChar = []
+            this.map((item)=>{
+                if(cacheExtraChar.indexOf(item) === -1){
+                    cacheExtraChar.push(item)
+                }
+            })
+            return cacheExtraChar
+        }
+        let newArr = removeArr.extraChar()
+        console.log(newArr)
+        // 获得数组中重复的
+        Array.prototype.refrain =function () {
+            let repeat = [];
+            [...this].sort().sort((a,b)=>{
+                if(a === b && repeat.indexOf(a) === -1) repeat.push(a);
+                console.log(a)
+            });
+            return repeat;
+        }
+        let newArr1 = removeArr.refrain()
+        console.log(newArr1)
+        // 获得数组中重复次数最多的
+    </script>
+</div>
+<div>
+    <script>
+        let person = [{name:'zhang',age:2},{name:'zang',age:20},{name:'li',age:10}]
+        let parSort = person.sort((a,b)=>{
+            return a.age -b.age
+        })
+        console.log(parSort)
+        // js 实现String.trim()
+        String.prototype.emptyTrim = function () {
+            return this.replace(/(^\s*)|(\s*$)/g, '')
+        }
+        for(let i; i<10; i++){
+            setTimeout((i)=>{
+                console.log(i)
+            }, 1000)
+        }
+    </script>
+</div>
+<div>
+    <script>
+        // 实现一个数组或者对象的浅拷贝和深度拷贝
+    // this谁调用  指向谁 运行的上下文，，确定，而非定义的时候来确定
+        Function.prototype.emulateBind  =function(context){
+            let self=this
+            return function(){
+                return self.apply(context)
+            }
+        }
+        // JS 的作用域是什么?有什么特别之处么?
+        // 作用域就是有它自身的上下文区域，内部会有变量提升，函数声明提升这些
+        // 函数声明优先于变量提升
+        // 作用域有全局作用域和块级作用域
+        // 作用域会影响this的指向
+
+        // 怎么解决跨域问题，有那些方法
+
+        // jsonp:单纯的get一些数据，局限性很大，利用script标签src无跨域限制来实现跨域
+
+        // 怎么防范xss 的攻击
+        //  转义
+        // cookie设置为http-only
+        //
+        // 怎么防止CSRF
+        // 验证码
+        //
+        // 描述cookie，sessionStorage，localStorage差异
+        // cookie大小4kb 跟随头部请求，占用带宽
+        //
+        // sessionStorage属于临时会话记录 关闭窗口记录没了
+        //
+        // localStorage保留在本地，不人为清除会一直保留
+        // 大小5M
+        //
+        // JS的原型链怎么理解
+        //
+        // 原型链是就是JS内的独有机制，
+        // 所有的对象都有一个内置的__proto__ 指向创建她的原型对象prototype
+        // 原型链基本是用来继承用的
+        //
+        //
+        // JS里面的继承怎么实现，如何避免原型链上面的对象共享
+
+        class PrentClass{
+            constructor(name){
+                this.name = name
+            }
+            say(){
+                console.log('hello', 'my name is '+ this.name)
+            }
+        }
+        class  subClass extends PrentClass{
+            constructor(name){
+                super(name)
+            }
+            move(){
+                console.log('hi i\'m, child, my name is '+this.name)
+            }
+        }
+        let test = new subClass('Nike')
+        test.move()
+        test.say()
+    </script>
+
+
+</div>
+</body>
+</html>

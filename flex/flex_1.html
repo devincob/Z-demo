@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*弹性布局默认不改变项目的宽度，但是它默认改变项目的高度。如果项目没有显式指定高度，就将占据容器的所有高度。*/
+        .box{
+            display: flex;
+            flex-direction: row ;
+            /*row（默认值）：主轴为水平方向，起点在左端。row-reverse：主轴为水平方向，起点在右端。
+             column：主轴为垂直方向，起点在上沿。column-reverse：主轴为垂直方向，起点在下沿。*/
+            flex-wrap: nowrap ;
+        /*它可能取三个值*/
+        /*（1）nowrap（默认）：不换行。
+        （2）wrap：换行，第一行在上方。
+        （3）wrap-reverse：换行，第一行在下方。*/
+            flex-flow:row wrap;
+        /*flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。*/
+        /*flex-flow: <flex-direction> <flex-wrap>;*/
+
+        }
+
+        .box div{
+            width: 200px;
+            margin: 0 10px;
+            background: orange;
+            justify-content: center;
+            /*flex-start（默认值）：左对齐*/
+            /*flex-end：右对齐*/
+            /*center： 居中*/
+            /*space-between：两端对齐，项目之间的间隔都相等。*/
+            /*space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。*/
+        }
+        .box div .child{
+            height: 30px;
+            width: 50px;
+            line-height: 30px;
+            background: deepskyblue;
+        }
+        .box div .child_1{
+            height: 30px;
+            width: 50px;
+            line-height: 30px;
+            background: deepskyblue;
+        }
+        form  {
+            display: flex;
+            align-items: stretch;
+        }
+        /*align-self属性可以取四个值。*/
+        /*flex-start：顶边对齐，高度不拉伸*/
+        /*flex-end：底边对齐，高度不拉伸*/
+        /*center：居中，高度不拉伸*/
+        /*stretch：默认值，高度自动拉伸*/
+        input  {
+            flex-grow: 1;
+        }
+        .box1{
+            display: inline-block;
+            display: -webkit-flex; /* safari */
+            /*weikit内核浏览器必须加上 weibkit前缀*/
+            /*设为Flex布局以后，子元素的float、clear和vertical-align属性将失效*/
+        }
+        .first{
+            display: flex;
+            flex-direction: row ;
+        /*| row-reverse | column | column-reverse*/
+        }
+        .block {
+            margin: 10px;
+            width: 100px;
+            height: 100px;
+            background: darkolivegreen;
+        }
+
+        .second{
+            display: flex;
+            flex-wrap:  wrap;
+            /*flex-wrap: nowrap | wrap | wrap-reverse;*/
+        }
+        .third{
+            display: flex;
+            flex-flow:row-reverse wrap
+        }
+        .four {
+            display: flex;
+            justify-content: flex-start ;
+            /*justify-content: flex-start | flex-end | center | space-between | space-around;*/
+            /*flex-start（默认值）：左对齐*/
+            /*flex-end：右对齐*/
+            /*center： 居中*/
+            /*space-between：两端对齐，项目之间的间隔都相等。*/
+            /*space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。*/
+        }
+        .five{
+            display: flex;
+            align-items: flex-start;
+            /*align-items: flex-start | flex-end | center | baseline | stretch;*/
+            /*flex-start：交叉轴的起点对齐。*/
+            /*flex-end：交叉轴的终点对齐。*/
+            /*center：交叉轴的中点对齐。*/
+            /*baseline: 项目的第一行文字的基线对齐。*/
+            /*stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。*/
+
+        }
+        .six{
+            display:flex ;
+            flex-flow: row wrap;
+            align-content: space-between;
+            height: 500px; /*// 必须要有高度*/
+            /*该属性可能取6个值。*/
+            /*flex-start：与交叉轴的起点对齐。*/
+            /*flex-end：与交叉轴的终点对齐。*/
+            /*center：与交叉轴的中点对齐。*/
+            /*space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。*/
+            /*space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。*/
+            /*stretch（默认值）：轴线占满整个交叉轴。*/
+        }
+        .seven{
+            display:flex ;
+            flex-flow: row wrap;
+        }
+        .seven-item{
+            width: 350px;
+            margin: 10px;
+            height: 100px;
+            background: orange;
+            /*flex-shrink: 1; !* default 1 *!*/
+            flex:  1 1 auto;
+            /*flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。*/
+            /*flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]*/
+        }
+        .block-w{
+            width: 350px;
+            margin: 10px;
+            height: 100px;
+            background: orange;
+        }
+        .item {
+            order: 3;
+            flex-grow: 1; /* default 0 */
+            flex-basis: 200px;
+            flex-shrink: 1;
+            /*flex-shrink: <number>; !* default 1 *!*/
+            /*flex-basis: <length> | auto; !* default auto *!*/
+        }
+        /*flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。*/
+    </style>
+</head>
+<body>
+<!--<div class="first">-->
+    <!--<div class="block">one</div>-->
+    <!--<div class="block">two</div>-->
+    <!--<div class="block">three</div>-->
+<!--</div>-->
+<!--<div class="second">-->
+    <!--<div class="block">1</div>-->
+    <!--<div class="block">2</div>-->
+    <!--<div class="block">three</div> <div class="block">one</div>-->
+    <!--<div class="block">two</div>-->
+    <!--<div class="block">three</div> <div class="block">one</div>-->
+    <!--<div class="block">two</div>-->
+    <!--<div class="block">three</div> <div class="block">three</div> <div class="block">one</div>-->
+    <!--<div class="block">two</div>-->
+    <!--<div class="block">3</div>-->
+<!--</div>-->
+<!--<div class="third">-->
+    <!--<div class="block">1</div>-->
+    <!--<div class="block">2</div>-->
+    <!--<div class="block">three</div> <div class="block">one</div>-->
+    <!--<div class="block">two</div>-->
+    <!--<div class="block">three</div> <div class="block">one</div>-->
+    <!--<div class="block">two</div>-->
+    <!--<div class="block">three</div> <div class="block">three</div> <div class="block">one</div>-->
+    <!--<div class="block">two</div>-->
+    <!--<div class="block">3</div>-->
+<!--</div>-->
+<div class="four">
+    <div class="block">one</div>
+    <div class="block">two</div>
+    <div class="block">three</div>
+</div>
+<!--<div class="five">-->
+    <!--<div class="block">one</div>-->
+    <!--<div style="height: 150px; background: yellowgreen;margin: 10px;">two</div>-->
+    <!--<div class="block">two</div>-->
+    <!--<div style="height: 160px;background: yellowgreen; margin: 10px;">two</div>-->
+    <!--<div class="block">three</div>-->
+<!--</div>-->
+<!--<div class="six">-->
+    <!--<div class="block-w item">sixsixsixsixsix</div>-->
+    <!--<div class="block">order属性定义项目的排列顺序。-->
+        <!--<br>-->
+        <!--数值越小，排列越靠前，默认为0。</div>-->
+    <!--<div class="block-w">three</div> <div class="block">one</div>-->
+    <!--<div class="block">two</div>-->
+    <!--<div class="block">three</div> <div class="block">one</div>-->
+    <!--<div class="block-w item">设置了order</div>-->
+    <!--<div class="block">three</div> <div class="block">three</div> <div class="block">one</div>-->
+    <!--<div class="block-w">two</div>-->
+    <!--<div class="block">3</div>-->
+    <!--<div class="block-w">11</div>-->
+    <!--<div class="block">1231</div>-->
+    <!--<div class="block">121</div>-->
+
+<!--</div>-->
+<!--<div class="seven">-->
+    <!--<div class=" seven-item">seven</div>-->
+    <!--<div class="block">order属性定义项目的排列顺序。-->
+        <!--<br>数值越小，排列越靠前，默认为0。</div>-->
+    <!--<div class="seven-item">three</div> <div class="block">one</div>-->
+    <!--<div class="seven-item item">item</div>-->
+    <!--<div class="seven-item">three</div> <div class="block">three</div> <div class="block">one</div>-->
+    <!--<div class="seven-item">two</div>-->
+    <!--<div class="seven-item">121</div>-->
+
+<!--</div>-->
+<!--<div>-->
+<!--<form action="#">-->
+        <!--<input type="email" placeholder="Enter your email">-->
+        <!--<button type="button"><svg>  &lt;!&ndash; a smiley icon &ndash;&gt;  </svg></button>-->
+    <!--</form>-->
+<!--</div>-->
+
+</body>
+</html>

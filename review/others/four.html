@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            border: 10px solid red;
+            padding: 10px;
+            overflow: auto;
+            box-sizing: border-box;
+        }
+        #div1 div{
+            background: blue;
+            width: 100%;
+            float: left;
+            margin: 10px;
+            line-height: 20px;
+        }
+        #div2{
+            border: 10px solid red;
+            padding: 10px;
+            box-sizing: border-box;
+
+        }
+        #div2 div{
+            background: blue;
+            line-height: 20px;
+            margin: 10px 0;
+        }
+        ul li a{
+            color: red;
+        }
+        li a{
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <div>目录</div>
+    <div>目录</div>
+    <div>目录</div>
+</div>
+<div id="div2">
+    <div style="height: 20px;">目录</div>
+    <div style="height: 20px;">多个相邻的没有设置高度的空元素，margin-bottom和margin-top会相互叠加</div>
+    <div style="height: 20px;">目录</div>
+</div>
+<ul>
+    <li><a href="">A</a></li>
+    <li><a href="">B</a></li>
+    <li><a href="">C</a></li>
+</ul>
+<script>
+    let height1 = document.getElementById('div1').offsetHeight
+    let height2 = document.getElementById('div2').offsetHeight
+    console.log(height1)
+    console.log(height2)
+
+    let tag = document.getElementsByTagName('a')
+    console.log(tag)
+    console.log(Array.isArray(tag))
+
+    for(let [ key, value ] of Array.from(tag)){
+        console.log(key);
+        // value.onclick=function () {
+        //     alert(key)
+        // }
+    }
+</script>
+</body>
+</html>

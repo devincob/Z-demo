@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        /*浏览器格式化，消除页面预留空间*/
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*适应各种浏览器屏幕尺寸*/
+        body{
+            width: 100%;
+            height: 100%;
+            /*设置页面字体大小*/
+            font-size: 14px;
+        }
+        /*列表内元素垂直居中*/
+        label,input,a{vertical-align:middle;}
+        /*给选项表示设置内边距*/
+        label{padding:0 10px 0 5px;}
+        /*给列表设置边框*/
+        dl{
+            width: 120px;
+            /*元素水平居中*/
+            margin: 10px auto;
+            border: 1px solid #666;
+            /*设置边框圆角*/
+            border-radius: 5px;
+            background: #fafafa;
+            padding: 10px 5px;
+        }
+        /*消除链接下划线，设置链接字体颜色*/
+        a{
+            text-decoration: none;
+            color: #09f;
+        }
+        /*鼠标指针浮动在链接上时，样式改变:字体变红色*/
+        a:hover{
+            color: red;
+        }
+        dt{
+            /*下边框*/
+            border-bottom: 1px solid black;
+            /*距离底部内边距*/
+            padding-bottom: 10px;
+        }
+        /*标示字体加粗*/
+        dt label{
+            font-weight: 700;
+        }
+        /*各个选项距离顶部外边距*/
+        p{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<dl class="checkBox">
+    <dt><input type="checkbox" id="checkAll">
+        <label>全选</label>
+        <!--/*给"反选"建立js链接，实现动态效果*/-->
+        <a href="javascript:;">反选</a>
+    </dt>
+    <dd>
+        <!--/*选项由选择框(输入框)和标示构成，所以使用<input>标签和<label>标签,label 元素不会呈现任何特殊效果。如果在 label 元素内点击文本，就会触发此控件*/-->
+        <p><input type="checkbox" name="item"><label>选项1</label></p>
+        <p><input type="checkbox" name="item"><label>选项2</label></p>
+        <p><input type="checkbox" name="item"><label>选项3</label></p>
+        <p><input type="checkbox" name="item"><label>选项4</label></p>
+        <p><input type="checkbox" name="item"><label>选项5</label></p>
+        <p><input type="checkbox" name="item"><label>选项6</label></p>
+        <p><input type="checkbox" name="item"><label>选项7</label></p>
+        <p><input type="checkbox" name="item"><label>选项8</label></p>
+    </dd>
+</dl>
+<!--<center>1、切换全选全不选文字2、根据选中个数更新全选框状态</center>-->
+<script type="text/javascript">
+    window.onload = function () {//网页加载完成后调用函数
+        var oA = document.getElementsByTagName("a")[0];//获取第一个a元素，即链接"反选"
+        var oInput = document.getElementsByTagName("input");//获取所有的输入选择框
+        var oLabel = document.getElementsByTagName("label")[0];//获取第一个lable标签，lable标签为input标签定义标记，即"全选"选项。
+        var isCheckAll = function () {//声明一个全选函数
+            for (var i = 1, n = 0; i < oInput.length; i++) {//从i=1循环，排除第一个选项"全选“，从选项1开始循环。
+                oInput[i].checked && n++//没选择一个选项，则n增加1，n=已选的项目数
+            }
+            oInput[0].checked = n == oInput.length - 1;//选择第一个选项=选择第一个项目之外的全部选项，所以点击全选的同时，其他所有选项一并选中。
+            oLabel.innerHTML = oInput[0].checked ? "全不选" : "全选"//innerHtml改变第一个标签"全选'的元素内容，后面为判断语句：选择"全选"时，全选变为全不选，否则为全选。
+        };
+        oInput[0].onclick = function () {//给第一个选项"全选"绑定点击函数事件,点击全选时，执行函数
+            for (var i = 1; i < oInput.length; i++) {
+                oInput[i].checked = this.checked//当点击第一个"全选"选项时，执行循环函数:遍历选择每个选项，即点击全选时，所有选项都选择，实现全选，同理实现全不选，
+                // 这里的this即为oInput[0]，将第一个input的checked值赋给每一个input元素。
+            }
+            isCheckAll()
+        };
+        oA.onclick = function () {//给"反选"绑定点击事件，当点击反选时，执行相应函数事件
+            for (var i = 1; i < oInput.length; i++) {
+                oInput[i].checked = !oInput[i].checked//点击反选，已选变未选，未选变已选，!为否定
+            }
+            ;
+        }
+        for (var i = 1; i < oInput.length; i++) {//点击改变元素
+            oInput[i].onclick = function () {
+                isCheckAll()//oLabel.innerHTML = oInput[0].checked ? "全不选" : "全选"，根据选中个数更新全选框状态，当全选后，全选切换为全不选。
+            };
+        }
+    }
+</script>
+</body>
+</html>

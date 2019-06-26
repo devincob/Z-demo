@@ -16,6 +16,8 @@ for x in range(1,11):
     l.append(x*x)
 print(l)
 
+
+
 # 但是循环太繁琐，而列表生成式则可以用一行语句代替循环生成上面的list：
 
 lx = [x*x for x in range(1,11)]
@@ -35,4 +37,12 @@ print(string)
 double = [m * n for m in [1,2,3] for n in [4,5,6]]
 
 print(double)
+# 三层和三层以上的循环就很少用到了。
 
+# 运用列表生成式，可以写出非常简洁的代码。例如，列出当前目录下的所有文件和目录名，可以通过一行代码实现：
+
+import os # 导入os模块，模块的概念后面讲到
+dx = [d for d in os.listdir('.')] # os.listdir可以列出文件和目录
+print(dx)
+# ['.emacs.d', '.ssh', '.Trash', 'Adlm', 'Applications', 'Desktop', 'Documents', 'Downloads', 'Library', 'Movies', 'Music', 'Pictures', 'Public', 'VirtualBox VMs', 'Workspace', 'XCode']
+# for循环其实可以同时使用两个甚至多个变量，比如dict的items()可以同时迭代key和value：

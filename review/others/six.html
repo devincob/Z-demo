@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        p span{
+            color: red;
+        }
+        p>span{
+            color: blue;
+        }
+        p#start {font-size: 18px;}
+    </style>
+    </head>
+<body>
+<a href="">a标签</a>
+<p><span>1 <span>span1</span></span><span>2</span><span>3</span></p>
+<p id="start">start</p>
+<script>
+    // let  str = '2015'
+    // console.log(str.split(''))
+    // console.log(str.split('').reverse())
+    // console.log(str.split('').reverse().join(','))
+    //
+    // let a = 0 || 2
+    // console.log(a)
+    // console.log(0 || 2)
+    // console.log(0 || '1'&&2)
+    //    逻辑运算符中 如果||前面的为false不管||后面的是什么都返回为后面的
+
+    // 如果指定的属性在指定的对象或其原型链中，则in 运算符返回true。
+    // console.log(typeof [8, 5, 2])
+    // (function(){
+    //     let a = b = 4
+    // })()
+    //
+    // console.log( b)
+    // console.log(console.log(console.log(console.log(a, b)
+    // js是先把所有变量拿出来 先声明然后执行
+    // console.log('a' in window, 'window')
+    // if(!('a' in window)){
+    //     console.log(111111)
+    //     let a = 1
+    // }
+    // console.log(a)
+
+let str = '12345612';
+function getRepeat(){
+    let json = {};
+    // charAt() 方法可返回指定位置的字符。
+    for (let i = 0; i < str.length; i++) {
+        if (!json[str.charAt(i)]) { //json对象中没有这一项key时(str.charAt(i))
+            json[str.charAt(i)] = 1;//将str.charAt(i)这一项key放入json中且value赋值为1
+        } else {//当json中存在了这一项key和value 那么key的value值累加
+            json[str.charAt(i)]++;
+        }
+        console.log(json,'json')//得到一个完整的统计好 key和value的json对象
+    }
+    let number = '';
+    let num=0;
+    for (let i in json) {
+        console.log(i,json[i])
+        if (json[i] > num) {
+            num = json[i];
+            number = i;
+        }
+    }
+return console.log('出现最多的值是'+number+'-出现次数为'+num);
+}
+    getRepeat(str)
+
+function maxCountElement(arr) {
+    let obj = {};
+    for (let i = 0; i < arr.length; i++) {
+        let key = arr[i];
+        if (obj[key]) {
+            obj[key]++;
+        } else {
+            obj[key] = 1;
+        }
+    }
+
+    let maxCount = 0;
+    let maxElement = arr[0];
+    let repeatElement = [];
+    for (let key in obj) {
+        if (obj[key] > maxCount) {
+            maxCount = obj[key];
+            maxElement = key;
+            repeatElement.length = 0;
+        } else if (maxCount === obj[key]) {
+            repeatElement.push(key);
+        }
+    }
+    if (repeatElement.length) {//当eq数组多于一个->也就是出现了同样重复次数的项
+        for (let j = 0; j < repeatElement.length; j++) {
+            maxElement += '，' + repeatElement[j];
+        }
+    }
+    console.log(obj,'obj')//得到一个完整的统计好 key和value的json对象
+    return console.log("该数组中出现次数最多的元素:" + maxElement + "-出现次数为:" + maxCount + "次");
+}
+
+let arr = [1, 2, 2, 3, 3 ,3, 3, 4, 5, 6];
+maxCountElement(arr);
+</script>
+
+</body>
+</html>

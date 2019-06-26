@@ -45,7 +45,6 @@ class Student(object):
 
     def get_name(self):
         return self.__name
-
     def get_score(self):
         return self.__score
 # 如果又要允许外部代码修改score怎么办？可以再给Student类增加set_score方法：
@@ -56,6 +55,5 @@ bart = Student('devincob', 19)
 print(bart.__name)
 print(bart.__score)
 # class Student(object):
-#
 #     def set_score(self, score):
 #         self.__score = score

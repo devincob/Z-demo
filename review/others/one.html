@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .sector{
+            width: 0;
+            height: 0;
+            border-width: 50px;
+            border-style: solid;
+            border-color: #ff0000 transparent transparent;
+            border-radius: 50px;
+        }
+        .test{
+            box-sizing:content-box;
+            border: 5px solid #fbb03b;
+            width: 100px;
+            height: 100px;
+            padding: 5px;
+        }
+        .text{
+            box-sizing:border-box;
+            border: 5px solid #fbb03b;
+            width: 100px;
+            height: 100px;
+            padding: 5px;
+        }
+        .clearfix:after{
+            visibility:hidden;
+            display:block;
+            font-size:0
+            content:'';
+            clear:both;
+            height:0;
+        }
+        .transition{
+            box-sizing: border-box;
+            border: 5px solid #f00;
+            padding: 5px;
+            width: 100px;
+            height: 100px;
+            position:absolute;
+            animation:movachangeColor ease-in 1.5s 1 forwards running;
+        }
+        @keyframes moveChangeColor {
+            from{
+                top: 0%;
+                left: 5%;
+                bckground-color:#f00
+            }
+            to{
+                top: 0%;
+                left: 50%;
+                background-color: #c81e82;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<div>
+    css有那些样式可以给子元素继承
+     一般不会改变盒子模型的属性都能继承
+    font-size，font-weight,line-height,color,cursor ...
+    会改变盒子模型的
+    display，margin，border，padding
+
+    行内元素有哪些，块级元素有哪些，空元素有哪些
+    行内 input span i img
+    块级元素
+    p div header footer aside article ul
+    空元素 hr br
+
+    border-sizing属性常用的有哪些，分别什么作用
+
+    有两个常用属性
+    content-box 标准盒子模型
+    border-box 怪异模型
+    padding-box 废除
+</div>
+<div class="sector"></div>
+
+</body>
+<div class="test">
+content-box的计算公式会吧宽高指向content，border和padding另外计算
+
+</div>
+<div class="text" style="float: left; background: yellowgreen;">
+    border-box的计算公式是总的大小涵盖这三者，content会缩小
+    此时的content为80px*80px
+    padding为5px*2
+    border为5px*2
+</div>
+<div class="clearfix" style="background: #fbb03b;">123131</div>
+<div>
+    清除浮动的方式有哪些，比较好的是哪一种
+
+    常用的一般为三种
+    .clearfix
+    clear:both
+    overflow:hidden
+    比较好的是 .clearfix：after
+    伪元素万金油版本，
+    .clearfix:after{
+    visibility:hidden;
+    display:block;
+    font-size:0
+    content:'';
+    clear:borth;
+    height:0;
+    }
+    还可写成
+    .clearfix:after,.clearfix:before{
+    content:'';
+    display:table;
+    }
+    clearfix:after{
+    clear:both;
+    overflow:hidden;
+    }
+    .clearfix{
+    zoom:1
+    }
+</div>
+<div class="transition animate">
+    <!--transition和animate有何区别？-->
+    <!--animate如何停留在最后一帧-->
+
+    <!--transition 用来做国度效果 通过事件触发一次 没中间状态 只有开始和结束-->
+    <!--animate用来做特效可以重复触发有中间状态-->
+    <!--animation-node：forwards是停留在最后一帧-->
+    <!--animation-node:backward则停留在首帧-->
+</div>
+</html>

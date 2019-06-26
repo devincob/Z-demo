@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .div{
+            width: 500px;
+            height: 300px;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            margin: -150px 0 0 -250px;
+            background-color: #c81e82;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div class="div">
+
+</div>
+<script>
+    let string = '12531703123612'
+    function getRepeat(str){
+        let json = {}
+        // charAt() 方法可返回指定位置的字符。
+        for (let i = 0; i < str.length; i++) {
+            if (json[str.charAt(i)]) {//json对象中有这一项key时
+                json[str.charAt(i)]++ //累加value值
+            } else {//json对象中没有这一项key时(str.charAt(i)),将str.charAt(i)这一项key放入json中且value赋值为1
+                json[str.charAt(i)] = 1
+            }
+        }
+        let num = 0
+        let repeatElementArr = []
+        for(let item in json){
+            if(json[item] > num){
+                repeatElementArr = [item]
+                num = json[item]
+            }else if(json[item] === num){//当有一个以上的重复次数相同的项时 放入数组
+                repeatElementArr.push(item)
+            }
+        }
+        console.log('json',json)//得到一个完整的统计好 key和value的json对象
+        return console.log('出现最多的值是'+repeatElementArr+'-出现次数为'+num);
+    }
+    getRepeat(string)
+
+    function repeatArr(arr){
+        let json = {}
+
+        for(let i=0; i<arr.length; i++){
+            if(json[arr[i]]){
+                json[arr[i]]++
+            }else {
+                json[arr[i]] = 1
+            }
+        }
+        let num  = 0
+        let repeatArray  = []
+       for (let item in json){
+            if(json[item]> num){
+                repeatArray = [item]
+                num = json[item]
+            }else if(json[item] === num){
+                repeatArray.push(item)
+                num = json[item]
+            }
+       }
+       return console.log('出现最多的值是'+repeatArray+'出现次数为', num)
+    }
+    let arr = [1,2,3,4,5,6,2]
+    repeatArr(arr)
+
+    // 通过Object创建对象
+
+    let person = new Object()
+    person.name = 'devin'
+    person.age = 12
+    console.log(person)
+
+    let  person1 = {
+        name:'devin',
+        age:23,
+        say: function(){
+            console.log('I love you')
+        }
+    }
+    console.log(person1)
+
+    function createPerson(name,age){
+        let  obj = new Object()
+        obj.name = name
+        obj.age = 12
+        obj.sayHello = function(){
+            console.log(this.name, this.age)
+        }
+        return obj
+    }
+
+    createPerson('devin', 23).sayHello()
+
+
+    function Persons(name, age){
+        this.name = name
+        this.age = age
+        this.sayHello = function(){
+            console.log(this)
+        }
+    }
+    let person4 = new Persons('devin', 23)
+
+    person4.sayHello()
+
+    function Personx(){}
+
+    Personx.prototype = {
+        constructor:Personx,
+        name:'clives',
+        age:28,
+        friend:['devin','marry'],
+        friends:function () {
+            console.log(this.friend)
+        }
+    }
+    let  personH = new Personx()
+    console.log(personH.friend)
+
+    function fnN (n){
+       return n > 1 ? n * fnN(n-1):1
+    }
+
+    console.log(fnN(6))
+</script>
+</body>
+</html>
