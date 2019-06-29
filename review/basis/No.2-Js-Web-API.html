@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js-Web-Api</title>
+</head>
+<body>
+<div>
+    ECMA-262是用js语法标准 规定js的一些语法
+     w3c标准 是关于规定js怎么去用
+    主要包括
+    dom操作 bom操作 事件绑定 ajax请求
+    存储
+    W3C和ECMA-262没有关系，没有规定js基础相关的东西
+    不管什么变量类型、原型作用域和异步
+    只管定义浏览器js操作页面的api和全局变量
+
+    常说的js包含两部分
+    js基础知识(ECMA262)和js-web-api(W3C标准)
+</div>
+<h4>
+    dom操作
+</h4>
+<ol>
+    <li>dom本质
+        <ol>
+            <li>浏览器把拿到的html代码，结构化一个浏览器能识别的的，并且js可操作的一个模型</li>
+        </ol>
+    </li>
+    <li>dom节点操作
+        <ol>
+            <li>获取dom节点</li>
+            <li>attribute:html 文档标签的属性
+                <script>
+                    let pList = document.getElementsByTagName('p')
+                    pList[0].getAttribute('style')
+                    pList[0].setAttribute('style', 'font-size:30px;')
+                </script>
+            </li>
+            <li>property:js对象的属性p.style.width...
+                <script>
+                    let obj = {x:100,   y:200}
+                    console.log(obj.x)
+                </script></li>
+        </ol>
+    </li>
+    <li>dom结构操作
+        <ol>
+            <li>新增节点
+                <script>
+                   let div1 =document.getElementById('div1')
+                   let p1 =document.createElement('p')
+                   p1.innerHTML = 'this is p1'
+                   div1.appendChild(p1)
+                   let p2 =document.getElementById('P2')
+                   div1.appendChild(p2)
+                </script>
+            </li>
+            <li>获取父元素
+                <script>
+                    let div1 = document.getElementById('DIV1')
+                    //获取父元素
+                    let parent = div1.parentElement
+                    //获取子元素
+                    let child  = div1.childNodes
+
+                    div1.removeChild(child[0])
+                </script>
+            </li>
+            <li>子元素
+                <script>
+
+                </script>
+            </li>
+            <li>删除节点
+                <script>
+
+                </script>
+            </li>
+        </ol>
+    </li>
+</ol>
+
+<h4>dom是哪一种基本的数据结构:树</h4>
+<h4>dom操作常用的api有哪些</h4>
+<h4>dom节点attr和property有和区别</h4>
+
+
+<h4>BOM操作</h4>
+<ol>
+    <li>如何检测浏览器类型</li>
+    <li>解析url的各部分</li>
+</ol>
+
+浏览器navigator
+<script>
+    // 通过userAgent判断
+    console.log(navigator.userAgent)
+    navigator.userAgent
+</script>
+屏幕 screen
+地址 location
+<script>
+    location.href
+    location.protocol 协议
+    location.host 域
+    location.pathname 路径
+    location.search
+    localtion.hash
+</script>
+历史 history
+<script>
+    history.back()
+    history.forward()
+</script>
+<h4> // 编写一个通用的事件绑定函数</h4>
+<h4> // 描述事件冒泡流程</h4>
+<h4> // 对于一个无线下拉加载图片的页面，怎么给每一个图片添加事件</h4>
+<h4> // 手写ajax</h4>
+<script>
+    /*    var xml = new XMLHttpRequest()//XMLHttpRequest 对象用于在后台与服务器交换数据
+        xml.onreadystatechange = function () {
+            if(xml.readyState===4){
+                if(xml.status===200){
+                    alert(xml.responseText)
+                }
+            }
+        }
+        xml.open('get','/api',true)
+        xml.send()*/
+    </script>
+<h4>// JSONP原理</h4>
+    <script>
+
+    /*
+    JSONP 是一种 数据调用方式， json是一种数据格式，是JavaScript的一种内置对象
+    由于同源策略的限制XmlHttpRequest只允许请求（域名 协议 端口）的资源
+    如果要进行跨域请求，可以利用jsonp
+    它的基本原理是，利用script标签src属性没有跨域限制，动态的添加一个<srcipt>标签
+
+    执行过程
+    首先在客户端注册一个callback(如TestJsonpCallback),
+    然后把callback的名字传给服务器
+        服务端得到callback的数值后，要用TestJsonpCallback(...)把将要输出的json内容包括起来，
+    此时，服务器生成JSON数据才能被客户端正确接收。
+    然后以 javascript 语法的方式，生成一个function,
+        function 名字就是传递上来的参数 'callback'的值 TestJsonpCallback.
+    最后将 json 数据直接以入参的方式，放置到 function 中,
+        这样就生成了一段 js 语法的文档，返回给客户端。
+    客户端浏览器，解析script标签，并执行返回的 javascript 文档,
+    此时javascript文档数据，作为参数， 传入到了客户端预先定义好的 callback 函数.
+    */
+</script>
+</body>
+</html>
