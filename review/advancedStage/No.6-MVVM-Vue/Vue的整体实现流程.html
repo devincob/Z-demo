@@ -6,6 +6,9 @@
 </head>
 <body>
 <script>
+    //响应式：vue如何监听data的每一个属性的变化？
+    //模板解析引擎：vue的模板如何被解析，指令如何处理
+    //渲染：vue的模板如何被渲染成html，以及渲染过程
 //渲染：vue的模板如何被渲染成html,以及渲染过程
 
 //    第一步:解析模板成render函数
@@ -28,7 +31,7 @@
     //    4,执行updateComponent,会走到vdom的patch方法
     //    5,patch()将vnode渲染成DOM初次渲染完成
 
-//    第四步:data属性变化,出发rerender
+//    第四步:data属性变化,除发rerender
     //    1,修改属性,被响应式的set监听到
     //    2,set中执行updateComponent
     //    3,set中执行updateComponent会重新执行,

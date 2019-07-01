@@ -12,21 +12,37 @@
     <div>
         <ul id="ul-list"></ul>
     </div>
-    
+
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        var $txtTitle = $('#txt-title')
-        var $btnSubmit = $('#btn-submit')
-        var $ulList = $('#ul-list')
-        $btnSubmit.click(function () {
-            var title = $txtTitle.val()
-            if (!title) {
-                return
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const store = new Vuex.Store({
+            state: {
+                count: 0
+            },
+            mutations: {
+                increment (state) {
+                    state.count++
+                }
             }
-            var $li = $('<li>' + title + '</li>')
-            $ulList.append($li)
-            $txtTitle.val('')
         })
+        store.commit('increment')
+
+        console.log(store.state.count) // -> 1
     </script>
+    <!--<script type="text/javascript">-->
+        <!--var $txtTitle = $('#txt-title')-->
+        <!--var $btnSubmit = $('#btn-submit')-->
+        <!--var $ulList = $('#ul-list')-->
+        <!--$btnSubmit.click(function () {-->
+            <!--var title = $txtTitle.val()-->
+            <!--if (!title) {-->
+                <!--return-->
+            <!--}-->
+            <!--var $li = $('<li>' + title + '</li>')-->
+            <!--$ulList.append($li)-->
+            <!--$txtTitle.val('')-->
+        <!--})-->
+    <!--</script>-->
 </body>
 </html>

@@ -5,6 +5,83 @@
     <title>Title</title>
 </head>
 <body>
+//async await 和promise的关系
+关于异步处理，ES5的回调使我们陷入地狱，Es6的promise使我们脱离魔障，终于ES7
+async-await带给我们光明
 
+async-await是promise和generator的语法糖，只是为了书写流畅，增强代码卡独行
+简单来说 async是建立在promise之上的
+
+基本语法
+
+<script>
+    async function f() {
+        return 1
+        // return Promise.resolve(1)
+
+    }
+    f().then(alert)
+</script>
+所以，async确保了函数返回一个promise，即使其中包含非promise
+await 可以让JavaScript 进行等待直到一个promise执行并返回结果，JavaScript才会继续往下执行
+以下是一个promise在1s后resolve的例子
+<script>
+    async function fn(){
+        let promise = new Promise((resolve,reject) =>{
+            setTimeout(()=>resolve('done'),10000)
+        })
+        let result = await promise
+        alert(result)
+    }
+    fn()
+</script>
+不嫩在常规函数中用await如果我们在非async中使用await就会出现语法错误
+<script>
+    function fx(){
+        let promise = Promise.resolve(1)
+        let result = await promise
+    }
+    // 如果忘记在函数前放置async 就会得到一个（syntax error）错误
+
+</script>
+让我们来看promise的链式操作
+
+1，我们要将.then 变成async
+此外 我们应该让函数变成async，这样await才能工作
+
+<scruot>
+    async function showAvatar() {
+    // read our JSON
+    let response = await fetch('/article/promise-chaining/user.json')
+    let user = await response.json()
+
+    // read github user
+    let githubResponse = await fetch(`https://api.github.com/users/${user.name}`)
+    let githubUser = await githubResponse.json()
+
+    // 展示头像
+    let img = document.createElement('img')
+    img.src = githubUser.avatar_url
+    img.className = 'promise-avatar-example'
+    documenmt.body.append(img)
+
+    // 等待3s
+    await new Promise((resolve, reject) => {
+    setTimeout(resolve, 3000)
+    })
+
+    img.remove()
+
+    return githubUser
+    }
+    showAvatar()
+    简洁易读
+    await不能工作在顶级作用域
+    那些刚开始使用await的人们老是忘记这一点，那就是我们不能将await放在代码的顶层，那样是行不通的：
+
+    // 顶层代码处syntax error
+    let response = await fetch('/article/promise-chaining/user.json')
+    let user = await response.json()
+    所以我们需要将await代码包裹在一个async函数中，就像上面的例子一样。</scruot>
 </body>
 </html>
