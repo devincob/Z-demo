@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+</div>
+<script>
+    Vue.component('child',{
+        props:{
+            value:String, //v-model会自动传递一个字段为value的prop属性
+        },
+        data(){
+            return {
+                mymessage:this.value
+            }
+        },
+        methods:{
+            changeValue(){
+                this.$parent.message = this.value
+                // this.$emit('input',this.mymessage);//通过如此调用可以改变父组件上v-model绑定的值
+            }
+        },
+        template:`
+            <div>
+                <input type="text" v-model="mymessage" @input="changeValue">
+            </div>`
+    })
+    Vue.component('parent',{
+        template:` <div>
+            <p>this is parent compoent!</p>
+            <p>{{message}}</p>
+        <button @click="changeChildVal">改变</button>
+    <child v-model="message"></child>
+        </div>`,
+        data(){
+            return {
+                message:'hello'
+            }
+        },
+        methods:{
+            changeChildVal(){
+                console.log(this.$children)
+                this.$children[0].mymessage = 'Hello';
+            }
+        }
+    })
+    new Vue({
+        el: '#app',
+        data: {
+        },
+        methods:{
+            confirm(val){
+                console.log(1223)
+            }
+        }
+    })
+</script>
+</body>
+</html>

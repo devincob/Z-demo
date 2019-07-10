@@ -32,9 +32,9 @@
             <li>获取dom节点</li>
             <li>attribute:html 文档标签的属性
                 <script>
-                    let pList = document.getElementsByTagName('p')
-                    pList[0].getAttribute('style')
-                    pList[0].setAttribute('style', 'font-size:30px;')
+                    // let pList = document.getElementsByTagName('p')
+                    // pList[0].getAttribute('style')
+                    // pList[0].setAttribute('style', 'font-size:30px;')
                 </script>
             </li>
             <li>property:js对象的属性p.style.width...
@@ -48,23 +48,22 @@
         <ol>
             <li>新增节点
                 <script>
-                   let div1 =document.getElementById('div1')
-                   let p1 =document.createElement('p')
-                   p1.innerHTML = 'this is p1'
-                   div1.appendChild(p1)
-                   let p2 =document.getElementById('P2')
-                   div1.appendChild(p2)
                 </script>
             </li>
             <li>获取父元素
                 <script>
-                    let div1 = document.getElementById('DIV1')
+                    // let div1 =document.getElementById('div1')
+                    // let p1 =document.createElement('p')
+                    // p1.innerHTML = 'this is p1'
+                    // div1.appendChild(p1)
+                    // let p2 =document.getElementById('p2')
+                    // div1.appendChild(p2)
                     //获取父元素
-                    let parent = div1.parentElement
+                    // let parent = div1.parentElement
                     //获取子元素
-                    let child  = div1.childNodes
+                    // let child  = div1.childNodes
 
-                    div1.removeChild(child[0])
+                    // div1.removeChild(child[0])
                 </script>
             </li>
             <li>子元素
@@ -101,12 +100,12 @@
 屏幕 screen
 地址 location
 <script>
-    location.href
+    /*location.href
     location.protocol 协议
     location.host 域
     location.pathname 路径
     location.search
-    localtion.hash
+    localtion.hash*/
 </script>
 历史 history
 <script>
@@ -114,8 +113,63 @@
     history.forward()
 </script>
 <h4> // 编写一个通用的事件绑定函数</h4>
+<div id="div1">
+    <a href="www.baidu.com" id="link1">去百度</a>
+    <a href="www.baidu.com" id="link2">去百度</a>
+    <a href="www.baidu.com" id="link3">去百度</a>
+    <a href="www.baidu.com" id="link4">去百度</a>
+    <p id="p1">激活</p>
+    <p id="=p2">取消</p>
+</div>
+<div id="div2">
+    <p id="p3">取消</p>
+    <p id="=p4">取消</p>
+</div>
+<script>
+// 最基本的事件绑定
+    let p1 = document.getElementById('p1')
+    p1.addEventListener('click',function () {
+        console.log('基本事件绑定')
+    })
+// 取消默认行为
+    let link = document.getElementById('link1')
+    link.addEventListener('click',function (e) {
+        e.preventDefault()
+        console.log('取消默认行为')
+    })
+    function bindEvent(elem,type,fn){
+        elem.addEventListener(type, fn)
+    }
+    bindEvent(link,'click',function (e) {
+        e.preventDefault()
+    })
+    bindEvent(p1,'click',function (e) {
+        e.stopPropagation()
+        alert('激活')
+    })
+    let body = document.body
+    bindEvent(body,'click',function (e) {
+        e.stopPropagation()
+        alert('取消')
+    })
+    //事件代理
+let div1 = document.getElementById('div1')
+div1.addEventListener('click',function (e) {
+    e.preventDefault()
+    let target = e.target
+    if(target.nodeName === 'A'){
+        console.log('click')
+    }
+
+})
+</script>
 <h4> // 描述事件冒泡流程</h4>
-<h4> // 对于一个无线下拉加载图片的页面，怎么给每一个图片添加事件</h4>
+<h4> // 对于一个无线下拉加载图片的页面，怎么给每一个图片添加事件
+    <ol>
+        <li>使用代理</li>
+        <li>代理的优点</li>
+    </ol>
+</h4>
 <h4> // 手写ajax</h4>
 <script>
     /*    var xml = new XMLHttpRequest()//XMLHttpRequest 对象用于在后台与服务器交换数据
@@ -130,8 +184,8 @@
         xml.send()*/
     </script>
 <h4>// JSONP原理</h4>
+跨域条件：协议域名端口号相同
     <script>
-
     /*
     JSONP 是一种 数据调用方式， json是一种数据格式，是JavaScript的一种内置对象
     由于同源策略的限制XmlHttpRequest只允许请求（域名 协议 端口）的资源

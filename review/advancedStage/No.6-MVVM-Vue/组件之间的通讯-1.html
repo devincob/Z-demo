@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <grandpa></grandpa>
+</div>
+<script>
+    Vue.component('grandson',{
+        template:`
+            <div>
+                <input type="text" v-model="$attrs.messagec" @input="passCData($attrs.messagec)"> </div>
+        `,
+
+        methods:{
+            passCData(val){
+                //触发父组件A中的事件
+                this.$emit('getCData',val)
+            }
+        }
+    })
+    Vue.component('father',{
+        data(){
+            return {
+                mymessage:this.message
+            }
+        },
+        template:`
+            <div>
+                <input type="text" v-model="mymessage" @input="passData(mymessage)"><span>我是爸爸</span>
+                <grandson v-bind="$attrs" v-on="$listeners"></grandson>
+                </div>
+        `,
+        props:['message'],//得到父组件传递过来的数据
+        methods:{
+            passData(val){
+                //触发父组件中的事件
+                this.$emit('getfatherData',val)
+            }
+        }
+    })
+    Vue.component('grandpa',{
+        template:`
+            <div>
+                <p>我是爷爷</p>
+                <p>{{message}}</p>
+                <p>{{messagec}}</p>
+               <father :messagec="messagec"  :message="message" v-on:getCData="getCData" v-on:getfatherData="getfatherData"></father>
+            </div>
+        `,
+        data(){
+            return {
+                message:'hello,儿子',
+                messagec:'hello 乖孙子'
+            }
+        },
+        methods:{
+            //执行子组件触发的事件
+            getfatherData(val){
+                this.message = val
+            },
+            //执行C子组件触发的事件
+            getCData(val){
+                console.log("这是来自C组件的数据："+val)
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            count: -1
+        },
+        methods:{
+            confirm(val){
+                console.log(1223)
+                // this.count =  val
+            }
+        }
+    })
+    // 定义一个名为 button-counter 的新组件
+
+
+</script>
+</body>
+</html>
