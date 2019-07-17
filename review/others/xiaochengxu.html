@@ -1,0 +1,613 @@
+<template>
+    <div>
+        6 请谈谈小程序的双向绑定和vue的异同？
+        大体相同，但小程序直接this.data的属性是不可以同步到视图的，必须调用this.setData()方法！
+
+        8 简述微信小程序原理？
+        小程序分为两个部分webview和appService。其中webview主要用来展现UI，appService用来处理业务逻辑、数据及接口调用。
+        它们在两个进程中运行，通过系统层JSBridge实现通信，实现UI的渲染、事件的处理
+
+        9 请谈谈原生开发小程序、wepy、mpvue 的对比？
+        个人认为，如果是新项目，且没有旧的 h5 项目迁移，则考虑用小程序原生开发，好处是相比于第三方框架，坑少。
+        而如果有 老的 h5 项目是 vue 开发 或者 也有 h5 项目也需要小程序开发，则比较适合 wepy 或者 mpvue 来做迁移或者开发
+        ---------------------
+        10、简单描述下微信小程序的相关文件类型？
+        答：微信小程序项目结构主要有四个文件类型,如下：
+        WXML （WeiXin Markup Language）是框架设计的一套标签语言，结合基础组件、事件系统，可以构建出页面的结构。
+        内部主要是微信自己定义的一套组件。
+        WXSS (WeiXin Style Sheets)是一套样式语言，用于描述 WXML 的组件样式，
+        js 逻辑处理，网络请求
+        json 小程序设置，如页面注册，页面标题及tabBar。
+        app.json
+        必须要有这个文件，如果没有这个文件，项目无法运行，因为微信框架把这个作为配置文件入口，整个小程序的全局配置。包括页面注册，网络设置，以及小程序的window背景色，配置导航条样式，配置默认标题。
+        app.js
+        必须要有这个文件，没有也是会报错！但是这个文件创建一下就行 什么都不需要写以后我们可以在这个文件中监听并处理小程序的生命周期函数、声明全局变量。
+        app.wxss
+        11、小程序的双向绑定和vue哪里不一样？
+        小程序直接this.data的属性是不可以同步到视图的，必须调用：
+        app.json 还可以设置哪些功能？
+        debug、functionalPages、subpackpages、workers、requirebackgroundmodes、plugins、preloadRule、resizable、navigatetominiprogramappidlist
+        window设置旋转属性方法
+        pageorientation： auto、portrait
+        小程序监听界面显示、隐藏、后台、前台方法
+        ① 根据声明周期函数 ② 还可以根据系统提供API监听方法，如：wx.appOnShow()
+        获取场景值的方法
+        let options = wx.getLanchOptionsSync()
+
+        onPageScroll方法的使用注意什么
+        由于此方法调用频繁，不需要时，可以去掉，不要保留空方法，并且使用onPageScroll时，尽量避免使用setData()，尽量减少setData()的使用频次。
+
+        视图渲染结束回调
+        使用setData(data, callback)，在callback回调方法中添加后续操作代码
+
+        同步API和异步API使用时注意事项
+        像wx.setStorageSync这种以Sync结尾的API为同步API，使用时使用try-catch来查看异常，如果判定API为异步，可以在其回调方法success、fail、complete中进行下一步操作。
+        对wx:if 和 hidden使用的理解
+        wx:if 有更高的切换消耗。
+        hidden 有更高的初始渲染消耗。
+        因此，如果需要频繁切换的情景下，用 hidden 更好，如果在运行时条件不大可能改变则 wx:if 较好。
+
+        12,简单介绍下三种事件对象的属性列表
+        基础事件（BaseEvent）
+        type: 事件类型
+        timeStamp：事件生成时的时间戳
+        target：触发事件的组件的属性值集合
+        currentTarget：当前组件的一些属性集合
+        自定义事件（CustomEvent）
+        detail
+        触摸事件（TouchEvent）
+        touches  changedTouches
+
+        13,组件间的共享特性怎么处理
+        组件间代码的共享行为适用behaviors构造器定义。
+        //定义：
+        module.exports = Behavior({
+        ……
+        }）
+        //使用：
+        const myBehavior = require('my-behavior')
+        Component({
+        behaviors: [myBehavior],
+        ……
+        }）
+
+        14,自定义组件有哪些优点？
+        ① 开发者可以将页面内的功能模块抽象成自定义组件，以便在不同的页面中重复使用；
+        ② 也可以将复杂的页面拆分成多个低耦合的模块，有助于代码维护。
+        监听组件引入和移除方法？
+        Component({
+        lifetimes: {
+        attached() {
+        // 在组件实例进入页面节点树时执行
+        },
+        detached() {
+        // 在组件实例被从页面节点树移除时执行
+        },
+        },
+        // 以下是旧式的定义方式，可以保持对 <2.2.3 版本基础库的兼容
+        attached() {
+        // 在组件实例进入页面节点树时执行
+        },
+        detached() {
+        // 在组件实例被从页面节点树移除时执行
+        },
+        // ...
+        })
+
+
+        15、小程序与原生App哪个好？
+        答： 小程序除了拥有公众号的低开发成本、低获客成本低以及无需下载等优势，
+        在服务请求延时与用户使用体验是都得到了较大幅度 的提升，
+        使得其能够承载跟复杂的服务功能以及使用户获得更好的用户体验。
+
+        分析下微信小程序的优劣势？
+        优势：
+        1、无需下载，通过搜索和扫一扫就可以打开。
+        2、良好的用户体验：打开速度快。
+        3、开发成本要比App要低。
+        4、安卓上可以添加到桌面，与原生App差不多。
+        5、为用户提供良好的安全保障。小程序的发布，微信拥有一套严格的审查流程， 不能通过审查的小程序是无法发布到线上的。
+        劣势：
+        1、限制较多。页面大小不能超过1M。不能打开超过5个层级的页面。
+        2、样式单一。小程序的部分组件已经是成型的了，样式不可以修改。例如：幻灯片、导航。
+        3、推广面窄，不能分享朋友圈，只能通过分享给朋友，附近小程序推广。其中附近小程序也受到微信的限制。
+        4、依托于微信，无法开发后台管理功能。
+
+        16、微信小程序与H5的区别？
+        第一条是运行环境的不同
+        传统的HTML5的运行环境是浏览器，包括webview，而微信小程序的运行环境并非完整的浏览器，
+        是微信开发团队基于浏览器内核完全重构的一个内置解析器，针对小程序专门做了优化，配合自己定义的开发语言标准，提升了小程序的性能。
+
+        第二条是开发成本的不同
+        只在微信中运行，所以不用再去顾虑浏览器兼容性，不用担心生产环境中出现不可预料的奇妙BUG
+
+        第三条是获取系统级权限的不同
+        系统级权限都可以和微信小程序无缝衔接
+
+        第四条便是应用在生产环境的运行流畅度
+        长久以来，当HTML5应用面对复杂的业务逻辑或者丰富的页面交互时，它的体验总是不尽人意，需要不断的对项目优化来提升用户体验。但是由于微信小程序运行环境独立
+
+        17、怎么解决小程序的异步请求问题？
+        在回调函数中调用下一个组件的函数：
+        app.js
+        index.js
+
+        18、你使用过哪些方法，来提高微信小程序的应用速度？
+        一、提高页面加载速度
+        二、用户行为预测
+        三、减少默认data的大小
+        四、组件化方案
+        19、怎么解决小程序的异步请求问题？
+        在回调函数中调用下一个组件的函数：
+        app.js
+        success: function (info) {
+        that.apirtnCallback(info)
+        }
+        index.js
+        onLoad: function () {
+        app.apirtnCallback = res => {
+        console.log(res)
+        }
+        ｝
+        20,请谈谈原生开发小程序、wepy、mpvue 的对比？
+        个人认为，如果是新项目，且没有旧的 h5 项目迁移，则考虑用小程序原生开发，好处是相比于第三方框架，坑少。
+        而如果有 老的 h5 项目是 vue 开发 或者 也有 h5 项目也需要小程序开发，则比较适合 wepy 或者 mpvue 来做迁移或者开发，近期看wepy几乎不更新了，所以推荐美团的mpvue。
+        而如果如果团队前端强大，自己做一套框架也没问题。
+
+        21. bindtap和catchtap的区别是什么？
+        bind事件绑定不会阻止冒泡事件向上冒泡，catch事件绑定可以阻止冒泡事件向上冒泡
+
+        22. Js数组转成换字符串，强制转换成整数及转换成浮点数的函数分别是什么？
+        js提供了parseInt()和parseFloat()两个转换函数。
+        前者把值转换成整数，后者把值转换成浮点数。
+        只有对String类型调用这些方法，这两个函数才能正确运行；对其他类型返回的都是NaN(Not a Number)。
+        1. 转换函数：
+        在 判断字符串是否是数字值前，parseInt()和parseFloat()都会仔细分析该字符串。
+        如果不是，该方法将返回NaN，不再继续执行其他操作。但如果该字符是有效数字，该方法将查看位置1处的字符，进行同样的 测试。
+        这一过程将持续到发现非有效数字的字符为止，此时parseInt()将把该字符之前的字符串转换成数字。
+
+        parseInt("1234blue"); //returns 1234
+        parseInt("0xA"); //returns 10
+        parseInt("22.5"); //returns 22
+        parseInt("blue"); //returns NaN
+
+        2. 强制类型转换
+        还可使用强制类型转换（type casting）处理转换值的类型。使用强制类型转换可以访问特定的值，即使它是另一种类型的。
+        ECMAScript中可用的3种强制类型转换如下：
+        Boolean(value)——把给定的值转换成Boolean型；
+        Number(value)——把给定的值转换成数字（可以是整数或浮点数）；
+        String(value)——把给定的值转换成字符串。
+
+        23. 利用js变量弱类型转换
+        var str= '012.345 ';
+        var x = str-0;
+        x = x*1;
+
+        上例利用了js的弱类型的特点，只进行了算术运算，实现了字符串到数字的类型转换，不过这个方法还是不推荐的。
+
+        24.微信小程序如何跨页面获取值？
+        依据上面的方式设置要传递的值，页面跳转后，我们就需要在下一个页面拿到传递的数据（这个数据在传递前，就已经被设置成全局变量）
+
+        在跳转后的js页面，接收传递过来的数据detail.js
+
+        同样通过全局额方式取值出来，（即和app.js中取某个变量的值是一样的）
+
+        var movieid = getApp().MovieDetailid;
+        console.log(movieid);
+
+        26. 如果需要用户授权，用户选择拒绝授权，此时应该如何处理？
+
+        在微信小程序开发时，当我们调用API  wx.getUserInfo(OBJECT) 时，需要用户授权。
+        但如果用户拒绝授权，我们如何兼容用户拒绝授权状态，拥有更好的用户体验呢？
+
+        先看看这个接口的官方文档：
+
+        wx.getUserInfo(OBJECT)
+        获取用户信息，需要先调用 wx.login 接口。
+        OBJECT参数说明：
+        参数名     类型   必填    说明
+        withCredentials Boolean 否  是否带上登录态信息
+        success  Function  否  接口调用成功的回调函数
+        fail  Function  否  接口调用失败的回调函数
+        complete Function 否 接口调用结束的回调函数（调用成功、失败都会执行）
+
+        27、小程序和Vue写法的区别？
+        一、循环遍历的时候：小程序是wx:for="list"，而Vue是v-for="infoin list"
+        二、调用data模型的时候：小程序是this.data.uinfo，而Vue是this.uinfo；给模型赋值也不一样，小程序是this.setData({uinfo:1})，而Vue是直接this.uinfo=1
+
+        28、微信小程序与H5的区别？
+        第一条是运行环境的不同
+        传统的HTML5的运行环境是浏览器，包括webview，而微信小程序的运行环境并非完整的浏览器，是微信开发团队基于浏览器内核完全重构的一个内置解析器，针对小程序专门做了优化，配合自己定义的开发语言标准，提升了小程序的性能。
+        第二条是开发成本的不同
+        只在微信中运行，所以不用再去顾虑浏览器兼容性，不用担心生产环境中出现不可预料的奇妙BUG
+        第三条是获取系统级权限的不同
+        系统级权限都可以和微信小程序无缝衔接
+        第四条便是应用在生产环境的运行流畅度
+        长久以来，当HTML5应用面对复杂的业务逻辑或者丰富的页面交互时，它的体验总是不尽人意，需要不断的对项目优化来提升用户体验。但是由于微信小程序运行环境独立
+
+        30、小程序的双向绑定和vue哪里不一样？
+        小程序直接this.data的属性是不可以同步到视图的，必须调用：
+
+        this.setData({
+        noBind:true
+        })
+        31、小程序的wxss和css有哪些不一样的地方？
+        一、wxss的图片引入需使用外链地址；
+        二、没有Body；样式可直接使用import导入.
+        都是用来描述页面的样子；
+        WXSS 具有 CSS 大部分的特性，也做了一些扩充和修改；
+        WXSS新增了尺寸单位，WXSS 在底层支持新的尺寸单位 rpx；
+        WXSS 仅支持部分 CSS 选择器；
+        WXSS 提供全局样式与局部样式
+
+        32、webview中的页面怎么跳回小程序中？
+        首先要引入最新版的jweixin-1.3.2.js，然后
+
+        wx.miniProgram.navigateTo({
+        url: '/pages/login/login'+'$params'
+        })
+
+        33、小程序关联微信公众号如何确定用户的唯一性？
+        使用wx.getUserInfo方法withCredentials为 true 时 可获取encryptedData，里面有 union_id。后端需要进行对称解密。
+
+        34、如何实现下拉刷新？
+        用view代替scroll-view,设置onPullDownRefresh函数实现
+
+        35、使用webview直接加载要注意哪些事项？
+        一、必须要在小程序后台使用管理员添加业务域名；
+        二、h5页面跳转至小程序的脚本必须是1.3.1以上；
+        三、微信分享只可以是小程序的主名称，如果要自定义分享的内容，需小程序版本在1.7.1以上；
+        四、h5的支付不可以是微信公众号的appid，必须是小程序的appid，而且用户的openid也必须是用户和小程序的。
+
+        36、小程序调用后台接口遇到哪些问题？
+        1.数据的大小有限制，超过范围会直接导致整个小程序崩溃，除非重启小程序；
+        2.小程序不可以直接渲染文章内容页这类型的html文本内容，若需显示要借住插件，但插件渲染会导致页面加载变慢，所以最好在后台对文章内容的html进行过滤，后台直接处理批量替换p标签div标签为view标签，然后其它的标签让插件来做，减轻前端的时间。
+
+        38,请谈谈小程序的生命周期函数？
+        onLoad() 页面加载时触发，只会调用一次，可获取当前页面路径中的参数。
+        onShow() 页面显示/切入前台时触发，一般用来发送数据请求；
+        onReady() 页面初次渲染完成时触发, 只会调用一次，代表页面已可和视图层进行交互。
+        onHide() 页面隐藏/切入后台时触发, 如底部 tab 切换到其他页面或小程序切入后台等。
+        onUnload() 页面卸载时触发，如redirectTo或navigateBack到其他页面时。
+
+        37. 你平时封装可以复用的方法吗？你会把可以复用的方法写在哪个文件里？
+
+        其实可以模拟一些框架的，比如bootsrap,写个demo出来，抽出css和js,js最好抽象成对象（构造函数）或者是带参数的方法，然后你只要声明对像，或者参数指定某个class或id，就可以了
+        写在html文件里有什么优点吗？
+        独立出来会有什么问题吗？尤其是载入页面的时候，应该会多发很多http请求吧，会不会造成加载变慢？
+
+        39. 设置值到页面暂存区（即data）里面的方法有几种？分别是什么？有什么区别？
+
+        1. 使用QueryString变量
+        QueryString是一种非常简单的传值方式，他可以将传送的值显示在浏览器的地址栏中。如果是传递一个或多个安全性要求不高或是结构简单的数值时，可以使用这个方法。但是对于传递数组或对象的话，就不能用这个方法了。下面是一个例子：
+        a.aspx的C#代码
+        private void Button1_Click(object sender, System.EventArgs e)
+        {
+        string s_url;
+        s_url = "b.aspx?name=" + Label1.Text;
+        Response.Redirect(s_url);
+        }
+
+        b.aspx中C#代码
+        private void Page_Load(object sender, EventArgs e)
+        {
+        Label2.Text = Request.QueryString["name"];
+        }
+
+
+        2. 使用Application 对象变量
+        Application对象的作用范围是整个全局，也就是说对所有用户都有效。其常用的方法用Lock和UnLock。
+        a.aspx的C#代码
+        private void Button1_Click(object sender, System.EventArgs e)
+        {
+        Application["name"] = Label1.Text;
+        Server.Transfer("b.aspx");
+        }
+
+        b.aspx中C#代码
+        private void Page_Load(object sender, EventArgs e)
+        {
+        string name;
+        Application.Lock();
+        name = Application["name"].ToString();
+        Application.UnLock();
+        }
+
+
+        3. 使用Session变量
+        想必这个肯定是大家使用中最常见的用法了，其操作与Application类似，作用于用户个人，所以，过量的存储会导致服务器内存资源的耗尽。
+        a.aspx的C#代码
+        private void Button1_Click(object sender, System.EventArgs e)
+        {
+        Session["name"] = Label.Text;
+        }
+
+        b.aspx中C#代码
+        private void Page_Load(object sender, EventArgs e)
+        {
+        string name;
+        name = Session["name"].ToString();
+        }
+
+
+        4. 使用Cookie对象变量
+        这个也是大家常使用的方法，与Session一样，其是什对每一个用户而言的，但是有个本质的区别，即Cookie是存放在客户端的，而session是存放在服务器端的。而且Cookie的使用要配合ASP.NET内置对象Request来使用。
+
+        a.aspx的C#代码
+        private void Button1_Click(object sender, System.EventArgs e)
+        {
+        HttpCookie cookie_name = new HttpCookie("name");
+        cookie_name.Value = Label1.Text;
+        Reponse.AppendCookie(cookie_name);
+        Server.Transfer("b.aspx");
+        }
+
+        b.aspx中C#代码
+        private void Page_Load(object sender, EventArgs e)
+        {
+        string name;
+        name = Request.Cookie["name"].Value.ToString();
+        }
+
+
+        5. 使用Server.Transfer方法
+        这个才可以说是面象对象开发所使用的方法，其使用Server.Transfer方法把流程从当前页面引导到另一个页面中，新的页面使用前一个页面的应答流，所以这个方法是完全面象对象的，简洁有效。
+        a.aspx的C#代码
+        public string Name
+        {
+        get{ return Label1.Text;}
+        }
+        private void Button1_Click(object sender, System.EventArgs e)
+        {
+        Server.Transfer("b.aspx");
+        }
+
+        b.aspx中C#代码
+        private void Page_Load(object sender, EventArgs e)
+        {
+        a newWeb; //实例a窗体
+        newWeb = (source)Context.Handler;
+        string name;
+        name = newWeb.Name;
+        }
+
+
+        40 微信小程序--data的赋值与取值
+        通过小程序官方文档可知：
+        Page() 函数用来注册一个页面。接受一个 object 参数，其指定页面的初始数据、生命周期函数、事件处理函数等。其中的参数data用来设置初始数据，WXML 中的动态数据均来自对应 Page 的 data。
+
+        所以如果页面需要显示动态数据必须要把数据更新到data中对应的变量中。
+        · 页面js文件中这么写：
+        Page({
+        data: {
+        message: 'Hello MINA!'
+        }
+        })
+        · wxml中这么写：
+        <view> {{ message }} </view>
+
+
+        · 如果该数据在操作过程中发生变化，需要将新数据重新绑定到该变量中，写法如下：
+        function setData(){
+        var that = this;
+        that.setData({
+        message: '新消息'
+        })
+        }
+        · 如果想在js文件中使用data中的数据写法如下：
+        function getData(){
+        var that = this;
+        console.log(that.data.message)
+        }
+
+
+        41. 如何分包加载？分包加载的优势在哪？
+        分包加载的介绍
+        大部分小程序都会由某几个功能组成，通常这几个功能之间是独立的，但会依赖一些公共的逻辑，并且这些功能通常会对应某几个独立的页面。那么小程序代码的打包，大可不必一定要打成一个，可以按照功能的划分，拆分成几个分包，当需要用到某个功能时，才加载这个功能对应的分包。
+        对于用户来说，小程序加载流程变成了：
+        1.首次启动时，先下载小程序主包，显示主包内的页面；
+        2.如果用户进入了某个分包的页面，再下载这个对应分包，下载完毕后，显示分包的页面。
+        采用分包加载，对开发者而言，能使小程序有更大的代码体积，承载更多的功能与服务；而对用户而言，可以更快地打开小程序，同时在不影响启动速度前提下使用更多功能。
+        分包的划分
+        在配置前首先需要开发者规划下各个分包需要容纳的内容，我们建议开发者按照功能划分的的原则，将同一个功能下的页面和逻辑放置于同一个目录下，对于一些跨功能之间公共逻辑，将其放置于主包下，这样可以确保在分包引用这部分功能时，这部分的逻辑一定存在。
+        在分包划分时，应该注意以下事项：
+        1.避免分包与分包之间引用上的耦合。因为分包的加载是由用户操作触发的，并不能确保某分包加载时，另外一个分包就一定存在，这个时候可能会导致 JS 逻辑异常的情况，例如报「"xxx.js" is not defined」这样的错误；
+        2.一些公共用到的自定义组件，需要放在主包内。
+        分包的配置
+        当理清了分包的划分后，就可以进行分包的配置了，这一步并不复杂。
+        假设支持分包的小程序目录结构如下：
+        开发者通过在 app.json subPackages 字段声明项目分包结构：
+
+        分包加载的低版本兼容问题
+        微信 6.6.0 版本开始支持分包加载，而对于低于这个版本的客户端，我们做了兼容处理，开发者不需要对老版本微信客户端做兼容。对于老版本的客户端，编译后台会将所有的分包打包成一个整包，老版本的客户端依然按照整包的方式进行加载。
+        所以在老版本的微信客户端下，是依然采取整包加载的方式加载的，建议开发者尽量控制代码包的大小。
+        目前小程序分包大小的限制：
+        整个小程序所有分包大小不超过 4M
+        单个分包/主包大小不能超过 2M
+        随着时间推移，老版本覆盖率降低，我们会考虑进一步扩大代码包的大小。
+
+        42. 在你开发小程序的过程中遇到过什么坑？ 你是怎么解决的？
+
+        1.我们使用app.json文件来对微信小程序进行全局配置，决定页面文件的路径、窗口表现、设置网络超时时间、设置多 tab 的时候在pages中写注释的时候回报错。
+        例如：
+        {
+        "pages":[//这是首页面
+        "pages/welcome/welcome"
+        ]}
+
+
+        此时就会报错
+
+        2.在json文件中没有写内容的时候也要加一对大括号{ }，不然的话也会报错
+        3. ①在开发微信小程序的时候，我们使用app.json文件来对微信小程序进行全局配置，决定页面文件的路径，窗口表现，设置网络超时时间，设置多Tab等。
+        以下是一个包含了所有配置选项的简单配置，app.json ：
+
+        {
+        //设置页面路径
+        "pages": [
+        "pages/index/index",
+        "pages/logs/index"
+        ],
+        //设置默认页面的窗口表现
+        "window": {
+        "navigationBarTitleText": "Demo"
+        },
+        //设置底部 tab 的表现
+        "tabBar": {
+        "list": [{
+        "pagePath": "pages/index/index",
+        "text": "首页"
+        }, {
+        "pagePath": "pages/logs/logs",
+        "text": "日志"
+        }]
+        },
+
+
+        //设置网络超时时间
+
+        { "networkTimeout": {
+        "request": 10000,
+        "downloadFile": 10000
+        },
+        //设置是否开启 debug 模式
+        "debug": true
+        }
+
+
+        ②但是在对页面json文件进行配置的时候只可以配置设置默认页面的窗口表现（即只能对window进行配置），但是在此时可以直接省略window，如果加window则没有效果，也不会报错。
+        以下是一个包含了window配置选项的简单配置，post.json ：
+        注意：这是错误的写法
+        {
+        "window":{
+        "navigationBarBackgroundColor": "#ffffff",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "微信接口功能演示",
+        "backgroundColor": "#eeeeee",
+        "backgroundTextStyle": "light"
+        }}
+        注意：正确的写法
+        {
+        "navigationBarBackgroundColor": "#ffffff",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "微信接口功能演示",
+        "backgroundColor": "#eeeeee",
+        "backgroundTextStyle": "light"}
+
+
+        4.此前一直没有注意vertical-align: middle和height：40rpx;line-height:40rpx进行设置垂直剧中的区别，这次主要说一下vertical-align: middle
+        代码如下：
+        <view class="post-author-date">
+            <image class="post-author" src="../../images/avatar/1.png">
+            </image>
+            <text class="post-date">Nov 15 2016</text>
+        </view>
+
+        .post-author{
+        width: 60rpx;
+        height: 60rpx;
+        vertical-align: middle;
+        }
+
+        .post-date{
+        margin-top: 5rpx;
+        vertical-align: middle;
+        /*height: 40rpx;
+        line-height: 40rpx;*/
+        }
+
+
+        总结：
+        ①vertical-align: middle;把此元素放在父元素的中部
+        ②当一个父元素里面有多个子元素，需要把几个子元素水平对齐，并且每个子元素都垂直剧中的时候，对每一个子元素进行设置 vertical-align: middle
+        ③height: 40rpx; line-height: 40rpx;可以对文本进行垂直居中
+        1. tip: wx.getUserInfo 接口需要用户授权，请兼容用户拒绝授权的场景。
+
+        我们就是要在用户点击拒绝的时候，弹出提示框，提示用户以提升用户体验。像下面这样的。
+        用具体代码实现就是，将弹窗写在 wx.getUserInfo 的fail回调函数中，像下面这样：
+
+        wx.getUserInfo({
+        success: function (resuser) {
+        console.log(success)
+        },
+        fail: function () {// 调用微信弹窗接口
+        wx.showModal({
+        title: '警告',
+        content: '您点击了拒绝授权，将无法正常使用******的功能体验。请10分钟后再次点击授权，或者删除小程序重新进入。',
+        success: function (res) {
+        if (res.confirm) {
+        console.log('用户点击确定')}}})}})
+
+
+        这样用户就获得了提示信息，但此时，用户还是停留在页面的，如果某些展示信息，还是给要给用户展示的，
+        只是在进行某些操作的时候要对授权进行验证的话，那就得继续修改我们的代码，保存用户的登录态，在其他地方做验证使用。
+
+        第一种思路：
+
+        保存登录态这里是这样的，将用户的登录信息传给后台，后台保存用户信息，同时用 open_id 在后台换取一个SessionId  用换取的这个SessionId 存在缓存，做为登录态验证。
+
+        wx.getUserInfo({
+        success: function (resuser) {
+        let userInfo = resuser.userInfo
+        that.healthApi.login(code, userInfo).then(logindata => {   // 这里将微信的请求封装成Promiese 风格
+        if (logindata.code === 0) {
+        var sessionId = logindata.data// 调用微信wechat.setStorage将换回来的 SessionId 存在本地缓存
+        that.wechat.setStorage('sessionId', sessionId).then(() => {
+        that.globalData.userInfo = userInfo
+        typeof cb == "function" && cb(that.globalData.userInfo)})}})},
+        fail: function () {
+        wx.showModal({
+        title: '警告',
+        content: '您点击了拒绝授权，将无法正常使用*****的功能体验。请10分钟后再次点击授权，或者删除小程序重新进入。',
+        success: function (res) {
+        if (res.confirm) {
+        console.log('用户点击确定')}}})}})
+
+        这样我们将登录态保存在了 SessionId 中，在每次登录的时候我们只需要再调用一个 检查 SessionId的接口就行，检查不通过再调微信登录接口。此处不做延伸了。
+        第二种思路：
+
+        在3.29微信小程序更新的版本中，加入了这样一条属性
+        withCredentials 字段基础库版本 1.1.0 开始支持，低版本需做兼容处理
+        这个字段的意思就是调用 wx.getUserInfo(OBJECT) 是否带上 登录态  的信息。
+        官方文档是这样解释的：
+        withCredentials 字段基础库版本 1.1.0 开始支持，低版本需做兼容处理
+        注：当 withCredentials 为 true 时，要求此前有调用过 wx.login 且登录态尚未过期，此时返回的数据会包含 encryptedData, iv 等敏感信息；当 withCredentials 为 false 时，不要求有登录态，返回的数据不包含 encryptedData, iv 等敏感信息。
+        success返回参数说明：
+
+        参数 类型 说明
+
+        userInfo OBJECT 用户信息对象，不包含 openid 等敏感信息
+        rawData  String 不包括敏感信息的原始数据字符串，用于计算签名。
+        signature   String  使用 sha1( rawData + sessionkey ) 得到字符串，用于校验用户信息。
+        encryptedData  String 包括敏感数据在内的完整用户信息的加密数据，详细见加密数据解密算法
+        iv       String  加密算法的初始向量，详细见加密数据解密算法
+
+        注：需要兼容微信低版本，向后兼容。
+        那么利用这个接口，我们可以直接拿到 登录状态，在其他需要验证登录的地方进行提示，而在不需要授权的地方还可以让用户浏览小程序。
+        回到前面的问题，在用户点击拒绝授权后，在某些操作时需要验证用户是否授权过，弹出交互信息，那么就利用上面的 SessionId或者 withCredentials 登录态进行下面的操作：
+
+        applyIn: function applyIn() {
+        if (wx.getStorageSync('sessionId')) {  // 根据储存的sessionId 进行验证
+        wx.navigateTo({
+        url: 'familyDoctorApply/familyDoctorApply?Oid='
+        + this.data.params.Oid + '&title=' + this.data.params.title +
+        '&serviceCity=' + this.data.array[this.data.index].name +
+        '&productPrice=' + this.data.product.productPrice
+        });
+        } else {
+        wx.showModal({
+        title: '警告',
+        content: '您点击了拒绝授权，无法使用此功能。',
+        success: function (res) {
+        if (res.confirm) {
+        console.log('用户点击确定')
+        }
+        }
+        })
+        }
+
+
+        这样一个简单完整的登录及授权，登录态保存等前端微信小程序解决方案就完成了，还可以继续扩展到登录有效期，退出登录，用户权限等跟多扩展的地方。
+
+    </div>
+</template>

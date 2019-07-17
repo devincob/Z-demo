@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <first></first>
+</div>
+<script>
+    Vue.component('third',{
+        template:`<div title="third, component">
+                  <input type="text" v-model="$attrs.firstToThirdMessage" @input="setThirdData($attrs.firstToThirdMessage)">
+                  </div>`,
+        methods:{
+            setThirdData(val){
+                //触发父组件A中的事件
+                this.$emit('getThirdData', val)
+            },
+        }
+    })
+    Vue.component('second',{
+        data(){
+            return {
+                secondMessage:this.firstToSecondMessage
+            }
+        },
+        template:`<div title="second, component">
+                    <input type="text" v-model="secondMessage" @input="setSecondData(secondMessage)">
+                     <third v-bind="$attrs" v-on="$listeners"></third>
+                  </div>`,
+        props:['firstToSecondMessage'],//得到父组件传递过来的数据
+        methods:{
+            setSecondData(val){
+                //触发父组件中的事件
+                this.$emit('getSecondData',val)
+            }
+        }
+    })
+    Vue.component('first',{
+        template:`<div title="first, component">
+                    <p>this is first compoent!</p>
+                    <p>来自Second 组件的数据：{{firstToSecondMessage}}</p>
+                    <p>来自third 组件的数据：{{firstToThirdMessage}}</p>
+                    <second :firstToThirdMessage="firstToThirdMessage" :firstToSecondMessage="firstToSecondMessage" v-on:getThirdData="getThirdData" v-on:getSecondData="getSecondData"></second>
+                 </div>`,
+        data(){
+
+            return {
+                firstToSecondMessage:'hello second',
+                firstToThirdMessage:'hello third' //传递给c组件的数据
+            }
+        },
+        methods:{
+            getSecondData(val){
+                this.firstToSecondMessage = val
+                console.log('这是来自Second组件的数据:'+ val)
+            },
+            //执行C子组件触发的事件
+            getThirdData(val){
+                this.firstToThirdMessage = val
+                console.log("这是来自Third组件的数据："+val)
+            }
+        }
+    })
+
+   var app = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

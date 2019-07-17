@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .parent{
+            width: 500px;
+            height: 500px;
+            background: black;
+            position: relative;
+        }
+        .child{
+            position: absolute;
+            width: 200px;
+            height: 150px;
+            background: blue;
+            top:0;
+            left:0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="parent">
+    <div class="child">Text here</div>
+</div>
+<script>
+    var a = 2
+    function fn() { // 预计处理:
+        /*
+        var a;
+        console.log(a)
+        a = 3
+        */
+        console.log(a)
+        var a = 3
+    }
+    fn() // ? undefined  先在自己的作用域找
+
+    function fn2() { // 预计处理:
+        console.log(a)
+        a = 3  // a是全局变量
+    }
+    fn2() // ? 2
+</script>
+</body>
+</html>

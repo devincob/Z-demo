@@ -22,18 +22,75 @@
             height: 100px;
             background: greenyellow;
         }
+        .srray{
+            width: 0;
+
+            height: 0;
+
+            border-top: 100px solid transparent;
+
+            border-right: 100px solid transparent;
+
+            border-left: 100px solid red;
+
+            border-bottom: 100px solid transparent;
+        }
+        .box{
+          display: flex;
+        }
+        .right,.left{
+            background: yellowgreen;
+            width: 100px;
+            height: 100px;
+        }
+        .center{
+            background: #fbb03b;
+            flex: 1;
+        }
+        .rightx{
+            width: 0;
+
+            height: 0;
+
+            border-top: 50px solid transparent;
+
+            border-left: 100px solid red;
+
+            border-bottom: 50px solid transparent;
+        }
     </style>
 </head>
 <body>
+<div class="rightx"></div>
+<div class="srray"></div>
+<div class="box">
+    <div class="left"></div>
+    <div class="center"></div>
+    <div class="right"></div>
+</div>
 <script>
-    var a = 10
-    sayhello()
-    function sayhello() {
-        a  = 20
-        console.log(a)
+    var arr = [20, 2, 5, 18, 36];
+    for (var i = 0; i < arr.length - 1; i++) {  // 比较的次数
+        for (var j = 0; j < arr.length - 1 - i; j++) { // 前后交换的次数
+            if (arr[j] < arr[j + 1]) {  // 判断大小
+                var temp = arr[j];  // 若判断的结果为真，则交换两个变量，若为假，直接进行下次比较
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
 
+            }
+        }
     }
-    console.log(a)
+    console.log(arr);
+    // var a = 10
+    // sayhello()
+    // function sayhello() {
+    //     a  = 20
+    //     console.log(a)
+    //
+    // }
+    // console.log(a)
+
+
 </script>
 <div class="div1">div1</div>
 <div class="div2">div2</div>
