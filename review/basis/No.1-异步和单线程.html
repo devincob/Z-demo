@@ -5,61 +5,70 @@
     <title>Title</title>
 </head>
 <body>
-<script>
-
-
-//一、同步和异步的区别是什么，分别举一个同步和异步的例子
-//同步会阻塞代码执行，而异步不会、
-//    1-1，什么是异步
-//异步
-/*console.log(100);
-setTimeout(function(){
-    console.log(200);
-}, 1000)
-console.log(300);
-//同步
-console.log(100);
-alert(200)
-console.log(300);*/
-//1-2何时需要异步
-//在可能发生等待的情况
-//等待过程中不能像alert一样阻塞程序进行
-//    1-3.前端使用异步的场景 js是单线程语言
-//1-3-1.定时任务
-//1-3-2.网络请求
-//1-3-3.事件绑定
-/*//ajax请求代码示例
-console.log('start')
-$.get('./data1.json', function(data1){
-        console.log(data1);
-    }
-)
-console.log('end')
-// <img>加载示例
-console.log('start')
- var img =document.createElement('img')
-img.onload = function(){
-    console.log('loaded');
-}
-img.src='/xxx.png'
-console.log('end')
-//事件绑定示例
-console.log('start')
-document.getElementById('btn').addEventListener('click', function(){
-    alert('click')
-})
-console.log('end')*/
-
-//    3.异步和单线程
-//所有异步程序的执行都是要先拿出去等着，
-console.log(100);
-setTimeout(function(){
-    console.log(200);
-})
-console.log(300);
-//二、一个关于setTimeout的示例
-
-//三、前端使用异步的场景
-</script>
+<h4>
+    //一、同步和异步的区别是什么，分别举一个同步和异步的例子</h4>
+<ol>
+        <li>什么是异步：//同步会阻塞代码执行，而异步不会、
+            <script>// 异步
+                console.log(100);
+                setTimeout(function(){
+                    console.log(200);
+                }, 1000)
+                console.log(300);
+            </script>
+            <script>//同步
+                console.log(100);
+                alert(200)
+                console.log(300);
+            </script>
+        </li>
+        <li>前端使用异步的场景 js是单线程语言
+            <ol>
+                <li>何时需要异步 :在可能发生等待的情况 等待过程中不能像alert一样阻塞程序进行</li>
+                <li>定时任务</li>
+                <li>网络请求
+                    <script>
+                        //ajax请求代码示例
+                        console.log('start')
+                        $.get('./data1.json', function(data1){
+                                console.log(data1);
+                            }
+                        )
+                        console.log('end')
+                        // <img>加载示例
+                        console.log('start')
+                         var img =document.createElement('img')
+                        img.onload = function(){
+                            console.log('loaded');
+                        }
+                        img.src='/xxx.png'
+                        console.log('end')
+                    </script>
+                </li>
+                <li>事件绑定
+                    <script>
+                        //事件绑定示例
+                        console.log('start')
+                        document.getElementById('btn').addEventListener('click', function(){
+                            alert('click')
+                        })
+                        console.log('end')
+                    </script>
+                </li>
+            </ol>
+        </li>
+        <li>异步和单线程
+            <script>//所有异步程序的执行都是要先拿出去等着，
+            console.log(100);
+            setTimeout(function(){
+            console.log(200);
+            })
+            console.log(300);
+            </script>
+        </li>
+    </ol>
+<h4>
+    //二、一个关于setTimeout的示例
+</h4>
 </body>
 </html>

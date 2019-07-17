@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <brother1></brother1>
+    <brother2></brother2>
+</div>
+<script>
+    Vue.component('brother1',{
+        data(){
+            return {
+                mymessage:'hello my brother1 this is old brother'
+            }
+        },
+        template:`
+            <div>
+                <p>this is brother1 compoent!</p>
+                <input type="text" v-model="mymessage" @input="passData(mymessage)">
+
+            </div>
+        `,
+        methods:{
+            passData(val){
+                //触发全局事件globalEvent
+                bus.$emit('globalEvent',val)
+
+            }
+        }
+    })
+    Vue.component('brother2',{
+        template:`
+            <div>
+                <p>this is brother2 compoent!</p>
+                <p>brother1传递过来的数据：{{brothermessage}}</p>
+            </div>
+        `,
+        data(){
+            return {
+                mymessage:'hello brother2',
+                brothermessage:''
+            }
+        },
+        mounted(){
+            //绑定全局事件globalEvent
+            bus.$on('globalEvent',(val)=>{
+                this.brothermessage=val;
+            })
+        }
+    })
+    let bus = new Vue()
+    new Vue({
+        el: '#app',
+        data: {
+        },
+        methods:{
+        }
+    })
+    // 定义一个名为 button-counter 的新组件
+
+
+</script>
+</body>
+</html>

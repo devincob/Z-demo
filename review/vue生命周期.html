@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的生命周期</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            new Vue({
+
+                el:'#itany',
+                data:{
+                    msg:'你好啊'
+                },
+                methods:{
+                    update(){
+                        this.msg='欢迎';
+                    },
+                    destroy(){
+                        this.$destroy();
+                    }
+                },
+                beforeCreate(){
+                    console.log('组件实例刚刚创建，还未进行数据的观测和事件的配置');
+                },
+                create(){
+                    console.log('组件实例已经创建完成，并且已经进行数据的观测和事件配置');
+                },
+                beforeMount(){
+                    console.log('模板编译之前，还没有挂载');
+                },
+                mounted(){
+                    console.log('模板编译之后，已经挂载,此时才会渲染页面，才能看到页面上数据的展示');
+                },
+                beforeUpdate(){
+                    console.log('组件数据更新之前');
+                },
+                updated(){
+                    console.log('组件更新之后');
+                },
+                beforeDestroy(){
+                    console.log('组件销毁之前');
+                },
+                destroyed(){
+                    console.log('组件销毁之后');
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="itany">
+    {{msg}}
+    <button @click="update">点击</button>
+    <button @click="destroy">点击销毁</button>
+</div>
+</body>
+</html>
