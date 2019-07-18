@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1 id="myButton">1321</h1>
+    <!--箭头函数什么情况下不能用-->
+    <script>
+        //1. 定义对象方法 方法被调用的时候，方法内的 this 就会指向方法所属的对象
+        // 1.1 定义字面量方法
+        let obj  = {
+            name :'qr',
+            say:()=>{
+            console.log(this)
+        },
+        rap:function(){
+            console.log(this)
+        }
+        }
+        obj.say()
+        obj.rap()
+        // 定义原型方法
+        function Cat(name) {
+            this.name = name;
+        }
+        Cat.prototype.sayCatName = () => {
+        console.log(this === window,this); // => true
+          return this.name;
+        };
+        Cat.prototype.rap = function() {
+            console.log(this === window,this); // => false
+            return this.name;
+        };
+        const cat = new Cat('Mew');
+        cat.sayCatName(); // => undefined
+        cat.rap(); // => undefined
+        //定义回调事件
+        const button = document.getElementById('myButton');
+        button.addEventListener('click', () => {
+            console.log(this === window, this); // => true
+            this.innerHTML = 'Clicked button';
+        });
+        button.addEventListener('dblclick',function(){
+            console.log(this === window, this); // => true
+            this.innerHTML = 'doubleClicked button';
+        })
+        //定义构造函数
+        const Message = (text) => {
+            this.text = text;
+            console.log(this ===window, this)
+        };
+        // Throws "TypeError: Message is not a constructor"
+        const helloMessage = new Message('Hello World1!');
+        function Messages(text){
+            this.text = text;
+            console.log(this ===window, this)
+        };
+        const helloMessages = new Messages('Hello World2!');
+    </script>
+
+    原型原型链介绍一下
+    原型的作用：
+    1.数据共享 节约内存内存空间
+    2.实现继承
+    原型链：
+    对象有一系列属性，其中有一个隐藏的属性__proto__，它连接实例和原型。
+
+    闭包是什么 MDN上说是…函数和声明该函数的词法环境的组合。
+    闭包作用
+
+    1.可以读取到其他函数内部的变量
+    2.可以将变量保存在内存中
+
+    应用场景
+
+    保护函数内的变量安全。
+    在内存中维持一个变量。
+    通过保护变量的安全实现JS私有属性和私有方法（不能被外部访问）
+
+    函数
+    自己有没有写过node中间件
+    webpack有没有用过，都用哪些功能
+    移动端适配怎么做
+    rem和em的区别
+    rem 设置像素是相对于根元素设置的
+    em设置 是相对于父元素设置的
+
+    css怎么画一个三角形(canvas)
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.lineTo(x3, y3);
+
+    常规函数，箭头函数的this指向
+    class的super怎么用
+    class如何继承的,子类如何使用父类里constructor里的方法
+    数组如何去重（ES5,ES6）
+    假设数组是 array = [1, 2, 2, 3];
+
+    Set方法去重 [...new Set(array)]或者Array.form(new Set(array))
+    fliter方法去重
+
+    let arr = [1, 2, 2, 'hello', 4, 5, 5, 6];
+    let newArr = arr.filter((currentValue, index,arr)=>arr.indexOf(currentValue)===index)
+    console.log(newArr)
+
+    Array.prototype.extraChar = function(){
+    let cacheExtraChar = []
+    this.map((item)=>{
+    if(cacheExtraChar.indexOf(item) === -1){
+    cacheExtraChar.push(item)
+    }
+    })
+    return cacheExtraChar
+    }
+    let newArr = removeArr.extraChar()
+    console.log(newArr)
+
+    let const var 区别
+    call apply bind区别和用法
+
+        为了改变函数运行时的上下文
+        call和apply 都可以调用函数 改变this指针 传参数 借用其他函数的方法
+        区别是第二个参数  call是 array apply是元素
+        apply（）和call（）是立即执行
+        bind（）不是立即执行而是回调执行，且bind不能多次绑定
+
+    服务端渲染有没有了解过
+    vue的虚拟dom原理是什么？怎么实现的？
+
+    vue的核心就是双向绑定和虚拟Dom
+    虚拟DOM来是基于snabbdom diff算法
+
+    逐个遍历newVdom的节点，找到它在oldVdom中的位置，
+    如果找到了就移动对应的DOM元素，如果没找到说明是新增节点，则新建一个节点插入。
+    遍历完成之后如果oldVdom中还有没处理过的节点，则说明这些节点在newVdom中被删除了，删除它们即可。
+
+    仔细思考一下，几乎每一步都要做移动DOM的操作，这在DOM整体结构变化不大时的开销是很大的，
+    实际上DOM变化不大的情况现实中经常发生，很多时候我们只需要变更某个节点的文本而已。
+
+    vue的beforeCreate和created区别
+    beforeCreate开始创建实例 数据观测
+    created是创建实例完成 数据观测完了
+
+    promise怎么实现两个同时执行
+    调用promise.all()
+    promise怎么让两个接口，接口1执行完成后执行接口2
+    调用promise.all().then()
+
+    await怎么知道后面执行的成功还是失败
+    promise遇到错误，catch里会有什么
+
+    用一个变量等于await+函数，那这个变量结果是什么
+
+    数组里都是数字时怎么排序？有几种方法
+    http请求头里都有什么内容
+
+    Accept 设置接受的内容类型 Accept: text/plain
+
+    Accept-Charset 设置接受的字符编码 Accept-Charset: utf-8
+
+    Accept-Encoding 设置接受的编码格式 Accept-Encoding: gzip, deflate
+
+    Accept-Language 设置接受的语言 Accept-Language: en-US
+
+    Authorization 设置HTTP身份验证的凭证 Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+    Cache-Control 设置请求响应链上所有的缓存机制必须遵守的指令 Cache-Control: no-cache
+
+    Content-Type 设置请求体的MIME类型（适用POST和PUT请求）
+
+    Cookie: $Version=1; Skin=new;
+
+    Date 设置消息发送的日期和时间 Date: Tue, 15 Nov 1994 08:12:31 GMT
+
+    Expect 标识客户端需要的特殊浏览器行为 Expect: 100-continue
+
+    Forwarded 披露客户端通过http代理连接web服务的源信息
+
+
+    Host 设置服务器域名和TCP端口号，如果使用的是服务请求标准端口号，端口号可以省略
+
+
+    Origin 标识跨域资源请求（请求服务端设置Access-Control-Allow-Origin响应字段） Origin: http://www.example-social-network.com
+
+    Pragma 设置特殊实现字段，可能会对请求响应链有多种影响 Pragma: no-cache
+
+
+    User-Agent 用户代理的字符串值
+
+
+    Warning 实体可能会发生的问题的通用警告
+
+
+
+    常用标准响应头字段
+
+
+    Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1
+
+    Status 设置HTTP响应状态
+
+    Status: 200 OK
+
+    cookie和localstorage的区别
+
+    node登陆注册怎么做的
+    node token的实现
+    如何在同一台服务器起多个pm2进程
+
+    还有个手写的题目记不起来了，不过考的就是闭包内私有变量和全局变量的区别
+</div>
+
+
+</body>
+</html>
