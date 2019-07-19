@@ -15,6 +15,10 @@ export default new Router({
       path: '/',
       name: 'app',
       component: {firstChild, secondChild}
+    }, {
+      path: '/index',
+      name: 'Index',
+      component: resolve => require(['@/components/index'], resolve)
     }
   ]
 })
