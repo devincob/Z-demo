@@ -1,0 +1,15 @@
+{
+  "compileType": "miniprogram",
+  "setting": {
+    "newFeature": true,
+    "urlCheck": true,
+    "es6": false,
+    "postcss": true,
+    "minified": false,
+    "autoAudits": false
+  },
+  "appid": "wx0af6827882ebf68a",
+  "projectname": "dididemo",
+  "description": "A mpx project",
+  "condition": {}
+}
