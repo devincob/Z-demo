@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Promise(executor){
+        var self = this
+        self.status = 'pending'
+        self.data = undefined
+        self.onResolvedCallback = []
+        self.resolve = function() {
+            console.log(1)
+        }
+        function reject(){
+            console.log(2)
+        }
+        executor(resolve)
+    }
+    var p= new Promise()
+    p.resolve()
+    p.reject()
+</script>
+
+</body>
+</html>
