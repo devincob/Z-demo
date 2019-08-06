@@ -6,22 +6,82 @@
 </head>
 <body>
 <script>
-    function Promise(executor){
-        var self = this
-        self.status = 'pending'
-        self.data = undefined
-        self.onResolvedCallback = []
-        self.resolve = function() {
-            console.log(1)
+
+ /*  function Promise(executor){
+       var self = this
+       self.status = 'pending';
+       self.data = undefined
+       self.onResolvedCallBack = []
+       console.log(12)
+       function resolve(value){
+           console.log(23)
+           if(self.status === 'pending'){
+               self.status = 'resolved'
+               self.data = value
+           }
+           for(var i =0; i<self.onResolvedCallBack.length; i++){
+               self.onResolvedCallBack[i](value)
+           }
+       }
+       executor(resolve)
+   }
+   Promise.prototype.then = function (resolve) {
+       this.onResolvedCallBack.push(resolve)
+   }
+   let a = new Promise((resolve) => { console.log(1)})*/
+    //
+    class Xyz{
+        constructor(executor) {
+            this.status = 'pending';
+            this.data = undefined;
+            this.onResolvedCallBack = [];
+            executor(this.resolve.bind(this))
         }
-        function reject(){
-            console.log(2)
+        resolve(value) {
+            if(this.status === 'pending'){
+                this.status = 'resolved'
+                this.data = value
+            }
+            for(let i =0; i<this.onResolvedCallBack.length; i++){
+                this.onResolvedCallBack[i](value)
+            }
         }
-        executor(resolve)
+        then(onResolve){
+            this.onResolvedCallBack.push(onResolve);
+        }
     }
-    var p= new Promise()
-    p.resolve()
-    p.reject()
+     function timeout(ms) {
+         return new Xyz((resolve) => {
+             setTimeout(resolve, ms, 'done');
+         });
+     }
+     timeout(100).then((value) => {
+         console.log(value);
+     })
+    // const Abc=(function(){
+    //  class qr{
+    //      constructor(executor) {
+    //          this.status = 'pending';
+    //          this.data = undefined;
+    //          this.onResolvedCallBack = [];
+    //          executor(this.resolve).bind(this)
+    //      }
+    //      resolve(value) {
+    //          // console.log(super)
+    //          console.log(2, this)
+    //          if(this.status === 'pending'){
+    //              this.status = 'resolved'
+    //              this.data = value
+    //          }
+    //          for(let i =0; i<this.onResolvedCallBack.length; i++){
+    //              this.onResolvedCallBack[i](value)
+    //          }
+    //      }
+    //      then(resolve){
+    //          this.onResolvedCallback.push(resolve);
+    //      }
+    //  }
+    // })()
 </script>
 
 </body>
