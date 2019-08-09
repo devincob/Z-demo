@@ -35,7 +35,18 @@
 
 <script>
 export default {
-    name: "drop-down"
+    name: "drop-down",
+    methods:{
+        handleButtonClick(){
+            console.log(1)
+        },
+        handleMenuClick(){
+            console.log(2)
+        },
+        handleMenuClick(){
+            console.log(3)
+        }
+    }
 }
 </script>
 
