@@ -5,12 +5,10 @@
     <ul>
       <li>
         <router-link to="/qr">Go to qr</router-link>
+        <router-link to="/qx">Go to qx</router-link>
       </li>
       <br>
       <h2>....................................</h2>
-      <li>
-        <router-link to="/qx">Go to qx</router-link>
-      </li>
     </ul>
   </div>
 </template>
@@ -29,7 +27,7 @@ export default {
         type: 'N',
         name: '10001'
       },
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to You'
     }
   },
   computed: {
