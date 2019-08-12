@@ -1,0 +1,86 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10-browsers
+
+    working_directory: ~/we-vue
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn test
+
+      # update codecov stats
+      - run: ./node_modules/.bin/codecov
+
+      # build demo
+      - run: yarn build:demo
+
+      # build docs
+      - run: yarn build:docs
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist
+            - docs-dist
+
+  deploy:
+    docker:
+      - image: circleci/ubuntu-server
+
+    steps:
+      - attach_workspace:
+          at: ~/we-vue
+
+      - add_ssh_keys:
+          fingerprints:
+            - "6f:b8:91:11:81:42:a3:9c:24:17:cf:be:e9:0b:41:67"
+
+      - run: echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+
+      # deploy demo
+      - deploy:
+          when: on_success
+          command: |
+            rsync -vzrtopg --progress -e ssh --delete ~/we-vue/dist/* $DEPLOY_USER@$DEPLOY_HOST:/data/wwwroot/demo.wevue.org
+
+      # deploy docs
+      - deploy:
+          when: on_success
+          command: |
+            rsync -vzrtopg --progress -e ssh --delete ~/we-vue/docs-dist/* $DEPLOY_USER@$DEPLOY_HOST:/data/wwwroot/wevue.org
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - docs
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - docs

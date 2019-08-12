@@ -1,0 +1,143 @@
+@import "colors";
+// menu
+.sider-menu {
+
+  // 背景颜色
+  //background-color: #4c4c4c;
+  //.ant-menu-inline.ant-menu-sub {
+  //  background-color: #626262;
+  //}
+
+  // 菜单项高度
+  .ant-menu-sub.ant-menu-inline > .ant-menu-item,
+  .ant-menu-sub.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical > .ant-menu-item,
+  .ant-menu-vertical-left > .ant-menu-item,
+  .ant-menu-vertical-right > .ant-menu-item,
+  &.ant-menu-inline > .ant-menu-item,
+  .ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical-left > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical-right > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical .ant-menu-item,
+  .ant-menu-vertical-left .ant-menu-item,
+  .ant-menu-vertical-right .ant-menu-item,
+  &.ant-menu-inline .ant-menu-item, .ant-menu-vertical .ant-menu-submenu-title,
+  .ant-menu-vertical-left .ant-menu-submenu-title,
+  .ant-menu-vertical-right .ant-menu-submenu-title,
+  &.ant-menu-inline .ant-menu-submenu-title {
+    height: 34px;
+    line-height: 34px;
+  }
+  // 菜单字体颜色
+  .ant-menu-sub.ant-menu-inline .ant-menu-item-group-title {
+    padding-left: 22px;
+    color: #dddddd;
+    //&:after {
+    //  content: '';
+    //}
+  }
+
+  // 菜单选中颜色
+  &.ant-menu.ant-menu-dark .ant-menu-item-selected,
+  .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    background-color: rgba(255, 255, 255, .2);
+    //background: linear-gradient(to right, rgba(30, 128, 240, .8), #ECEFF2);
+    &:after {
+      //content: ' ';
+      width: 6px;
+      //background-color: @pageBgcolors;
+      background-color: @primaryColor;
+      //background-color: rgba(30, 128, 240, .8);
+    }
+  }
+}
+.ant-layout-sider-trigger {
+  background-color: rgba(0, 0, 0, .2);
+}
+
+  // card
+.a-card-mini {
+  .ant-card-head {
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 16px;
+    .ant-button {
+      font-size: 12px;
+      padding: 2px 0;
+    }
+    .ant-card-head-title, .ant-card-extra {
+      font-size: 14px;
+      padding: 0;
+      line-height: 34px;
+      .ant-button {
+        font-size: 12px;
+        padding: 0 8px;
+        height: 20px;
+      }
+    }
+  }
+  .ant-card-body {
+    padding: 12px;
+  }
+}
+
+// card
+.a-card-small {
+  .ant-card-head {
+    min-height: 34px;
+    padding: 4px 14px;
+    font-size: 16px;
+    .ant-card-head-title, .ant-card-extra {
+      font-size: 14px;
+      padding: 0;
+      line-height: 34px;
+      .ant-btn {
+        font-size: 12px;
+        padding: 0 8px;
+        height: 24px;
+      }
+    }
+  }
+  .ant-card-body {
+    padding: 14px;
+  }
+}
+
+.ant-layout-content {
+  min-height: initial;
+}
+
+
+// table
+
+.detail-table{
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border:1px solid #ebeef5;
+  tr td,tr th{
+    border:1px solid #ebeef5;
+    text-align: right;
+  }
+  th {
+    background-color: #fafafa;
+  }
+  tr{
+    height: 30px;
+    td:nth-child(1), td:nth-child(3){
+      width: 15%;
+      text-align: right;
+      padding: 0 5px;
+      color:#888888;
+    }
+    td:nth-child(2), td:nth-child(4){
+      width: 35%;
+      max-width: 35%;
+      text-align: left;
+      padding: 0 10px;
+      word-break: break-all;
+    }
+  }
+}

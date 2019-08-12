@@ -1,0 +1,26 @@
+[
+  {"id": 1, "pid": 0, "title": "工作台", "path": "/", "icon": "home", "disabled": false},
+
+  {"id": 6, "pid": 0, "title": "账号设置", "path": "/account/settings", "icon": "home", "disabled": true},
+
+  {"id": 2, "pid": 0, "title": "订单管理", "path": "", "icon": "code", "disabled": false},
+  {"id": 22, "pid": 2, "title": "发布订单", "path": "/order/publish", "icon": "", "disabled": false},
+  {"id": 222, "pid": 2, "title": "岗位需求", "path": "/order/demands", "icon": "", "disabled": false},
+  {"id": 2222, "pid": 2, "title": "订单列表", "path": "/order/orders", "icon": "", "disabled": false},
+  {"id": 22222, "pid": 2, "title": "预约中订单", "path": "/order/appointment", "icon": "", "disabled": false},
+  {"id": 222222, "pid": 2, "title": "待上班订单", "path": "/order/waitforwork", "icon": "", "disabled": false},
+  {"id": 2222222, "pid": 2, "title": "上班中订单", "path": "/order/atwork", "icon": "", "disabled": false},
+  {"id": 22222222, "pid": 2, "title": "待支付订单", "path": "/order/waitforpay", "icon": "", "disabled": false},
+
+  {"id": 3, "pid": 0, "title": "收藏管理", "path": "", "icon": "code", "disabled": false},
+  {"id": 33, "pid": 3, "title": "收藏夹", "path": "/user/favorites", "icon": "", "disabled": false},
+  {"id": 333, "pid": 3, "title": "黑名单", "path": "/user/blacklist", "icon": "", "disabled": false},
+
+
+  {"id": 4, "pid": 0, "title": "费用管理", "path": "", "icon": "code", "disabled": false},
+  {"id": 44, "pid": 4, "title": "授信与流水", "path": "/user/credit-flow", "icon": "", "disabled": false},
+
+  {"id": 5, "pid": 0, "title": "部门管理", "path": "", "icon": "code", "disabled": false},
+  {"id": 55, "pid": 5, "title": "部门门店账号", "path": "/depart/departList", "icon": "code", "disabled": false},
+  {"id": 555, "pid": 5, "title": "账号管理", "path": "/depart/accountList", "icon": "code", "disabled": false}
+]
