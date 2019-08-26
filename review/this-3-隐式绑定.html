@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //隐式绑定
+    // 调用位置是否有上下文对象；或者是否被某个对象拥有或者包含
+    function foo(){
+        console.log(this)
+    }
+    var obj ={
+        a:1,
+        foo:foo//函数调用的时候obj拥有它
+    }
+    obj.foo()
+
+</script>
+</body>
+</html>

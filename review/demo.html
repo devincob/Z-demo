@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+  question：
+
+</div>
+<script>
+  var cloneObj = function (obj) {
+    var newObj = {};
+    if (Array.isArray(obj)) {
+      newObj = [];
+    }
+    for (var key in obj) {
+      debugger
+      var val = obj[key];
+      console.log(key, val)
+      newObj[key] = typeof val === 'object' ? cloneObj(val): val;
+      console.log(newObj[key])
+    }
+    return newObj;
+  };
+  var obj = {
+    a:function(){console.log(1)},
+    b:{c:1},
+    name:'devin'}
+  var newObj = cloneObj(obj)
+
+
+
+
+
+  let unsuitable_for_the_othe_half = {
+    not_fit_wife: ['护士','幼师','银行女'],
+    nurse:{
+      reason1:'护士是因为太忙，医院她照顾别人，压力大，回家有气就甩你身上，顺便喊累，要你伺候，要你理解，姑奶奶伺候着',
+      reason2:'护士很乱和空姐一样外表光鲜，但大多很乱，虚荣心强,眼光高、挑剔、爱攀比, 而且对待护士 要比平常人多好几倍的耐心和好脾气。'
+    },
+    kindergarten:{
+      reason1:'一般接触家长，而家长在接送孩子都是光鲜的，她们收入不算高，眼光对比后比较挑剔，很攀比，高不成低不就的',
+      reason2:'总说孩子家长开的奥迪A6，开的林肯，一次两次一笑而过，时间长了，她觉得你没上进心，你觉得她物质还无知',
+    },
+    female_bank_staff:{
+      reason1:'银行是因为存贷款业务接触人员最广泛，金钱接触的多，看人待物特别现实,一切都有了标价，跟菜市场买菜一样,但体制内待久了眼高手低，长相一般却心高气傲',
+      reason2:'银行真正的中后台或者非基层运营岗位的女职员大多随和且不物质,就好比你都有了，还会在乎吗，反而有些高不成低不就的岗位，挣得不多，要求特多，也更势力'
+    },
+    total1:'三类行业工作人员接触社会形形色色太多人，说白了就是人家啥鸟人都见过，所以要求会很高',
+    total3:'而且女人扎堆， 而女人扎堆的圈子，攀比容易严重，慢慢男的就会接受不了',
+    total2:'他们不是要求高，而是很多根本活在梦里，外在一副涉世未深的样子，其实很有心机，做事决绝',
+    male_common_opinion:' 家风不正、缺家教、性格不好、有遗传病的女性,挥霍无度、无同情心，不懂体谅他人的女性',
+    others_not_fit_wife:['律师','销售女','空姐'],
+    not_fit_husband:['摄影','厨师','发廊男'],
+    photographer:{
+      reason:'经常拍人，接触女性，美女很多，照片本来就是是一种伪装，做人也很虚假，慢慢人也虚假，对待人更虚假'
+    },
+    cooker:{
+      reason:'在家里很懒，而且饭点永远不在一起，没有家的感觉,厨师油腻啤酒肚的多,厨师做久了对男性性功能有影响'
+    },
+    hairdresser:{
+      reason:'摄影师美发师接触接触异性的机会多,满口阿谀奉承，轻佻滥情',
+    },
+    female_common_opinion:'他们都是渣男。浪啊！黄赌毒、好色吹牛、没有上进心者、滥情的、不负责任、家暴的男人、不孝顺、没有耐心也不适合成为丈夫、'
+  }
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //找到调用位置，根据4条绑定规则(默认绑定，隐式绑定，显式绑定，硬绑定)
+    // 默认绑定是window
+
+     function foo(){
+         'use strict'
+         console.log(this)
+         // console.log(this.a)
+     }
+     var a =2
+     foo()
+
+    // foo()是直接使用，不带任何修饰的函数引进调用的，因此只能使用默认绑定
+    // 如果使用严格模式的话 全局对象无法使用默认绑定
+    // this会绑定到underfined
+    // this的绑定规则完全取决于调用位置，但是事非严格模式下才会绑定到全局对象，严格模式下
+    // 与函数的调用位置无关
+    function foo(){
+        console.log(this)
+        debugger
+        // console.log(this.a)
+    }
+    // var a = 2
+    (function(){
+        // 'use strict'
+        foo()
+    })()
+</script>
+
+</body>
+</html>

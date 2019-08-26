@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //由于硬绑定是一种非常常用的的模式，所以在es5中提供了内置的方法Function.prototype.bind
+    //用法
+   /* function foo(something){
+        console.log(this.a,something)
+        return this.a+something
+    }
+    var obj = {
+        a:2
+    }
+    var bar = foo.bind(obj)
+    var b = bar(3)
+    console.log(b);*/
+    // bind(...)会返回一个新函数，他会把参数设置为this的上下文，并调用函数
+    // API调用的上下文，其作用和bind一样确保你的回调函数使用指定的this
+    function foo(el){
+        console.log(el,this.id)
+    }
+    var obj ={
+        id:'awesome'
+    }
+    [1,2,3].forEach(foo,obj)
+</script>
+
+</body>
+</html>

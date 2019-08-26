@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+// 显式绑定
+//     分析隐式绑定，必须在一个对象内部包含一个指向函数的属性，
+// 并通过这个属性间接引用函数，从而把this间接绑定到这个对象上
+
+/*call和apply是怎么工作的呢？
+call()
+apply()
+第一个参数是一个对象，他们会吧这个对象绑定到this，
+接着在调用函数时指定这个this，因为你可以直接指定this绑定对象，
+因此成为显式绑定*/
+function foo(){
+    console.log(this.a)
+    console.log(this)
+}
+var obj ={
+    a:2
+}
+foo.call(obj)
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 对象属性引用链只有最顶层，或者说最后一层影响调用位置
+    function foo(){
+        console.log(this.a)
+        console.log(this)
+
+    }
+    var obj2 ={
+        a:12,
+        foo:foo
+    }
+    var obj1 ={
+        a:2,
+        obj2:obj2
+    }
+    obj1.obj2.foo()
+
+</script>
+</body>
+</html>

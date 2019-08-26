@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  import store from './store'
+  store.commit('increment')
+  console.log(store.state.count) // -> 1
+</script>
+</body>
+</html>

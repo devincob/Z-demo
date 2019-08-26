@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+
+</div>
+<script>
+    function makeAdder(x){
+        function add(y){
+            return y+x
+        }
+        return add
+    }
+    var plusOne = makeAdder(1)
+    var plusTen = makeAdder(10)
+    console.log(plusOne)
+    console.log(plusOne(3))
+    console.log(plusOne(41))
+    console.log(plusTen(13))
+
+
+</script>
+<script>
+    function User(){
+        var userName,passWord
+
+        function doLogin(user,pw){
+            userName = user
+            passWord = pw
+        }
+        var publicAPI = {
+            login:doLogin
+        }
+        return publicAPI
+    }
+    var fred = User()
+
+
+    fred.login('fred','123fads')
+</script>
+<script>
+    // "use strict" 严格模式下未定义，非严格模式下foo指向了 window
+    function foo(){
+        console.log(this.bar)
+        console.log(this)
+    }
+    var bar ='global'
+
+    var obj1 ={
+        bar:'obj1',
+        foo:foo
+    }
+    var obj2 ={
+        bar:'obj2'
+    }
+    foo()
+    obj1.foo()
+    foo.call()
+    foo.call(obj2)
+    new foo()
+</script>
+</body>
+</html>
